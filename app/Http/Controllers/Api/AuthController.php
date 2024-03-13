@@ -9,6 +9,7 @@ use App\Http\Resources\Api\UserResource;
 use App\Models\User;
 use App\Services\Api\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -74,5 +75,21 @@ class AuthController extends Controller
         }
     }
 
+    public function logout()
+    {
+        try {
+            $this->userService->update(JWTAuth::parseToken()->authenticate(), ['is_active' => false]);
+            JWTAuth::invalidate(JWTAuth::getToken());
+            return response()->json(
+                [
+                    'message' => 'User logged out successfully'
+                ], 200);
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'message' => $e->getMessage()
+                ], 500);
+        }
+    }
 
 }

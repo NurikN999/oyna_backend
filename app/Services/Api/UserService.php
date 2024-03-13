@@ -12,4 +12,9 @@ class UserService
     {
         return User::create($data);
     }
+
+    public function update(User $user, array $data): bool
+    {
+        return $user->update($data);
+    }
 }
