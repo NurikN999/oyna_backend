@@ -8,13 +8,27 @@ use App\Models\User;
 
 class UserService
 {
+
+    public function all()
+    {
+        return User::all();
+    }
+
     public function create(array $data): mixed
     {
         return User::create($data);
     }
 
-    public function update(User $user, array $data): bool
+    public function update(User $user, array $data): User
     {
-        return $user->update($data);
+        $user = $user->fill($data);
+        $user->save();
+
+        return $user;
+    }
+
+    public function delete(User $user)
+    {
+        return $user->delete();
     }
 }
