@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Http\Resources\Api\CityResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,6 +24,7 @@ class UserResource extends JsonResource
             'interests' => $this->interests,
             'teams' => $this->teams,
             'is_active' => $this->is_active,
+            'city' => new CityResource($this->city),
             'created_at' => $this->created_at
         ];
     }
