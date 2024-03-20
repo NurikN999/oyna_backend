@@ -26,9 +26,11 @@ class UserController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function show(User $user, Request $request)
+    public function show(User $user)
     {
-
+        return response()->json([
+            'data' => new UserResource($user)
+        ], Response::HTTP_OK);
     }
 
     public function update(User $user, UpdateUserRequest $request)

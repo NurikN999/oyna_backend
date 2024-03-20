@@ -28,6 +28,8 @@ class UpdateUserRequest extends FormRequest
             'age' => 'numeric',
             'interest' => 'string',
             'teams' => 'string|max:255',
+            'city_id' => 'numeric',
+            'password' => 'string|min:8|confirmed',
         ];
     }
 }

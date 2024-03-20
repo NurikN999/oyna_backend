@@ -22,6 +22,9 @@ class UserService
     public function update(User $user, array $data): User
     {
         $user = $user->fill($data);
+        if (isset($data['city_id'])) {
+            $user->city_id = $data['city_id'];
+        }
         $user->save();
 
         return $user;
