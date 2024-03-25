@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\EntertainmentController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\MusicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,15 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/', [EntertainmentController::class, 'index']);
         Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
         Route::patch('/{entertainment}', [EntertainmentController::class, 'update']);
+    });
+
+    Route::prefix('musics')->group(function () {
+        Route::get('/genres', [MusicController::class, 'genres']);
+        Route::post('/', [MusicController::class, 'store']);
+        Route::get('/', [MusicController::class, 'index']);
+        Route::get('/{music}', [MusicController::class, 'show']);
+        Route::patch('/{music}', [MusicController::class, 'update']);
+        Route::delete('/{music}', [MusicController::class, 'destroy']);
     });
 
 });
