@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Api;
 
 use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
@@ -19,6 +20,12 @@ class ImageService
         ]);
 
         return $image;
+    }
+
+    public function delete(Image $image)
+    {
+        Storage::disk('public')->delete($image->path);
+        $image->delete();
     }
 
 }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return response()->json([
             'data' => CityResource::collection(City::all()),

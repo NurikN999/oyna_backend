@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\HospitalityVenueController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\EntertainmentController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\MusicController;
+use App\Http\Controllers\Api\MusicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,15 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/{music}', [MusicController::class, 'show']);
         Route::patch('/{music}', [MusicController::class, 'update']);
         Route::delete('/{music}', [MusicController::class, 'destroy']);
+    });
+
+    Route::prefix('hospitality-venues')->group(function () {
+        Route::post('/', [HospitalityVenueController::class, 'store']);
+        Route::get('/types', [HospitalityVenueController::class, 'types']);
+        Route::get('/', [HospitalityVenueController::class, 'index']);
+        Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
+        Route::patch('/{hospitalityVenue}', [HospitalityVenueController::class, 'update']);
+        Route::delete('/{hospitalityVenue}', [HospitalityVenueController::class, 'destroy']);
     });
 
 });

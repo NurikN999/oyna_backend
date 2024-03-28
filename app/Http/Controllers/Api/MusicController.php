@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Enums\MusicGenreType;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MusicRequest\StoreMusicRequest;
 use App\Http\Requests\MusicRequest\UpdateMusicRequest;
 use App\Http\Resources\Api\MusicResource;
