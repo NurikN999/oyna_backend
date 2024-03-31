@@ -23,11 +23,9 @@ class HospitalityVenueController extends Controller
 
     public function index()
     {
-        $hospitalityVenues = HospitalityVenue::all();
+        $hospitalityVenues = HospitalityVenue::paginate(4);
 
-        return response()->json([
-            'data' => HospitalityVenueResource::collection($hospitalityVenues)
-        ]);
+        return HospitalityVenueResource::collection($hospitalityVenues);
     }
 
     public function store(StoreHospitalityVenueRequest $request)

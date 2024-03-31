@@ -16,7 +16,7 @@ class CityController extends Controller
         ]);
     }
 
-    public function show(Request $request, City $city)
+    public function show(City $city)
     {
         return response()->json([
             'data' => new CityResource($city),

@@ -38,11 +38,9 @@ class EntertainmentController extends Controller
 
     public function index()
     {
-        $entertainments = Entertainment::all();
+        $entertainments = Entertainment::paginate(4);
 
-        return response()->json([
-            'data' => EntertainmentResource::collection($entertainments)
-        ]);
+        return EntertainmentResource::collection($entertainments);
     }
 
     public function show(Entertainment $entertainment)

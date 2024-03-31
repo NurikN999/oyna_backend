@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\EntertainmentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MusicController;
+use App\Http\Controllers\Api\PartnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::get('/{user}', [UserController::class, 'show']);
         Route::patch('/{user}', [UserController::class, 'update']);
+        Route::delete('/{user}', [UserController::class, 'destroy']);
     });
 
     Route::prefix('entertainments')->group(function () {
@@ -42,6 +44,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/', [EntertainmentController::class, 'index']);
         Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
         Route::patch('/{entertainment}', [EntertainmentController::class, 'update']);
+        Route::delete('/{entertainment}', [EntertainmentController::class, 'destroy']);
     });
 
     Route::prefix('musics')->group(function () {
@@ -59,7 +62,15 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/', [HospitalityVenueController::class, 'index']);
         Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
         Route::patch('/{hospitalityVenue}', [HospitalityVenueController::class, 'update']);
-        Route::delete('/{hospitalityVenue}', [HospitalityVenueController::class, 'destroy']);
+        Route::delete('/{hospitalityVenue}', [HospitalityVenueController::class, 'delete']);
+    });
+
+    Route::prefix('partners')->group(function () {
+        Route::post('/', [PartnerController::class, 'store']);
+        Route::get('/', [PartnerController::class, 'index']);
+        Route::get('/{partner}', [PartnerController::class, 'show']);
+        Route::patch('/{partner}', [PartnerController::class, 'update']);
+        Route::delete('/{partner}', [PartnerController::class, 'delete']);
     });
 
 });

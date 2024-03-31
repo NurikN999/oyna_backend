@@ -43,11 +43,9 @@ class MusicController extends Controller
 
     public function index()
     {
-        $musics = Music::all();
+        $musics = Music::paginate(4);
 
-        return response()->json([
-            'data' => MusicResource::collection($musics)
-        ], 200);
+        return MusicResource::collection($musics);
     }
 
     public function show(Music $music)
