@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\EntertainmentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MusicController;
+use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PartnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,14 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/{partner}', [PartnerController::class, 'show']);
         Route::patch('/{partner}', [PartnerController::class, 'update']);
         Route::delete('/{partner}', [PartnerController::class, 'delete']);
+    });
+
+    Route::prefix('offers')->group(function () {
+        Route::post('/', [OfferController::class, 'store']);
+        Route::get('/', [OfferController::class, 'index']);
+        Route::get('/{offer}', [OfferController::class, 'show']);
+        Route::patch('/{offer}', [OfferController::class, 'update']);
+        Route::delete('/{offer}', [OfferController::class, 'destroy']);
     });
 
 });
