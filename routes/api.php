@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PartnerController;
+use App\Http\Controllers\Api\PrizeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,14 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/{offer}', [OfferController::class, 'show']);
         Route::patch('/{offer}', [OfferController::class, 'update']);
         Route::delete('/{offer}', [OfferController::class, 'destroy']);
+    });
+
+    Route::prefix('prizes')->group(function () {
+        Route::post('/', [PrizeController::class, 'store']);
+        Route::get('/', [PrizeController::class, 'index']);
+        Route::get('/{prize}', [PrizeController::class, 'show']);
+        Route::patch('/{prize}', [PrizeController::class, 'update']);
+        Route::delete('/{prize}', [PrizeController::class, 'destroy']);
     });
 
 });
