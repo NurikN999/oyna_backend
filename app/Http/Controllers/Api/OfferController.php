@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
-
     public function index()
     {
         return OfferResource::collection(Offer::paginate(4));

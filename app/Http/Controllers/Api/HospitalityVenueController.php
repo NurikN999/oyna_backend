@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 
 class HospitalityVenueController extends Controller
 {
-
     private ImageService $imageService;
 
     public function __construct(ImageService $imageService)

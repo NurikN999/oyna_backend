@@ -14,7 +14,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-
     private UserService $userService;
 
     public function __construct(UserService $userService)
@@ -40,12 +39,16 @@ class AuthController extends Controller
                         'token' => $token,
                         'user' => new UserResource($user)
                     ]
-                ], 201);
+                ],
+                201
+            );
         } catch (\Exception $e) {
             return response()->json(
                 [
                     'message' => $e->getMessage()
-                ], 500);
+                ],
+                500
+            );
         }
     }
 
@@ -57,7 +60,9 @@ class AuthController extends Controller
                 return response()->json(
                     [
                         'message' => 'Invalid credentials'
-                    ], 401);
+                    ],
+                    401
+                );
             }
             return response()->json(
                 [
@@ -66,12 +71,16 @@ class AuthController extends Controller
                         'token' => $token,
                         'user' => new UserResource(auth()->user())
                     ]
-                ], 200);
+                ],
+                200
+            );
         } catch (\Exception $e) {
             return response()->json(
                 [
                     'message' => $e->getMessage()
-                ], 500);
+                ],
+                500
+            );
         }
     }
 
@@ -83,12 +92,16 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'message' => 'User logged out successfully'
-                ], 200);
+                ],
+                200
+            );
         } catch (\Exception $e) {
             return response()->json(
                 [
                     'message' => $e->getMessage()
-                ], 500);
+                ],
+                500
+            );
         }
     }
 

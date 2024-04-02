@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class EntertainmentController extends Controller
 {
-
     private ImageService $imageService;
 
     public function __construct(ImageService $imageService)

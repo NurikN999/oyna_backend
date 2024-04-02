@@ -1,0 +1,124 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Oyna API Documentation",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/cities": {
+            "get": {
+                "tags": [
+                    "City"
+                ],
+                "summary": "Get all cities",
+                "operationId": "185d0aefb5fd6e9d4e5f1263e2734df4",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CityResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cities/{city}": {
+            "get": {
+                "tags": [
+                    "City"
+                ],
+                "summary": "Get city by id",
+                "operationId": "30ae4a727d6f249244811a32f60aa319",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "description": "City id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CityResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CityResource": {
+                "title": "CityResource",
+                "description": "City resource",
+                "properties": {
+                    "id": {
+                        "description": "City id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "City name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CityResourceCollection": {
+                "title": "CityResourceCollection",
+                "description": "City resource collection",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CityResource"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
-
     public function upload($file, string $imageableType, int $imageableId)
     {
         $path = $file->store('images', 'public');

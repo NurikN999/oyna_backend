@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class MusicService
 {
-
     public function upload($file, string $title)
     {
         $fileName = $title . '.' . $file->getClientOriginalExtension();

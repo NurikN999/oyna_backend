@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 
 class MusicController extends Controller
 {
-
     private ImageService $imageService;
     private MusicService $musicService;
 
