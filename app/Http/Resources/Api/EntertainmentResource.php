@@ -51,9 +51,6 @@ class EntertainmentResource extends JsonResource
      * ref="#/components/schemas/ImageResource"
      * )
      * )
-     * @OA\Tag(
-     * name="Entertainment"
-     * )
      */
     public function toArray(Request $request): array
     {

@@ -81,6 +81,328 @@
                     }
                 ]
             }
+        },
+        "/api/entertainments": {
+            "get": {
+                "tags": [
+                    "Entertainments"
+                ],
+                "summary": "Get all entertainments",
+                "description": "Get all entertainments",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Entertainments retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/EntertainmentResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Entertainments"
+                ],
+                "summary": "Store a newly created entertainment",
+                "description": "Store a newly created entertainment",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image",
+                                    "city_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Entertainment name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Entertainment description"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "city_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Entertainment created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Entertainment created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/EntertainmentResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/entertainments/{entertainment}": {
+            "get": {
+                "tags": [
+                    "Entertainments"
+                ],
+                "summary": "Get entertainment by id",
+                "description": "Get entertainment by id",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "entertainment",
+                        "in": "path",
+                        "description": "Entertainment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entertainment retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/EntertainmentResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entertainment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Entertainment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Entertainments"
+                ],
+                "summary": "Delete entertainment by id",
+                "description": "Delete entertainment by id",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "entertainment",
+                        "in": "path",
+                        "description": "Entertainment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entertainment deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Entertainment deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entertainment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Entertainment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Entertainments"
+                ],
+                "summary": "Update entertainment by id",
+                "description": "Update entertainment by id",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "entertainment",
+                        "in": "path",
+                        "description": "Entertainment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image",
+                                    "city_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Entertainment name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Entertainment description"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "city_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entertainment updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Entertainment updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/EntertainmentResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entertainment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Entertainment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -109,6 +431,76 @@
                         "items": {
                             "$ref": "#/components/schemas/CityResource"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "EntertainmentResource": {
+                "required": [
+                    "id",
+                    "type",
+                    "title",
+                    "address",
+                    "description",
+                    "city_id",
+                    "image"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Transform the resource into an array.",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "Entertainment"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Entertainment title"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "Entertainment address"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Entertainment description"
+                    },
+                    "city_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageResource"
+                    }
+                },
+                "type": "object"
+            },
+            "ImageResource": {
+                "required": [
+                    "id",
+                    "path",
+                    "imageable_type",
+                    "imageable_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Transform the resource into an array.",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "path": {
+                        "type": "string",
+                        "example": "images/1.jpg"
+                    },
+                    "imageable_type": {
+                        "type": "string",
+                        "example": "App\\Models\\Entertainment"
+                    },
+                    "imageable_id": {
+                        "type": "integer",
+                        "example": "1"
                     }
                 },
                 "type": "object"
