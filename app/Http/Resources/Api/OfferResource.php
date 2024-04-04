@@ -26,7 +26,7 @@ class OfferResource extends JsonResource
      *         type="string",
      *         description="The text of the offer"
      *     )
-     * ) // Add this closing parenthesis
+     * )
      */
     public function toArray(Request $request): array
     {
