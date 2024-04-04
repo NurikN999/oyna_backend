@@ -1107,6 +1107,204 @@
                     }
                 ]
             }
+        },
+        "/api/partners": {
+            "get": {
+                "tags": [
+                    "Partners"
+                ],
+                "summary": "Get all partners",
+                "description": "Get all partners",
+                "operationId": "getPartners",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PartnersResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Partners"
+                ],
+                "summary": "Create a new partner",
+                "description": "Create a new partner and return the partner data",
+                "operationId": "storePartner",
+                "requestBody": {
+                    "description": "Data for creating a new partner",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePartnerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Partner created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PartnersResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/partners/{id}": {
+            "get": {
+                "tags": [
+                    "Partners"
+                ],
+                "summary": "Get a specific partner",
+                "description": "Get a specific partner by its id",
+                "operationId": "getPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the partner to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PartnersResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Partners"
+                ],
+                "summary": "Update a specific partner",
+                "description": "Update a specific partner by its id",
+                "operationId": "updatePartner",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the partner to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for updating a partner",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePartnerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Partner updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PartnersResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Partners"
+                ],
+                "summary": "Delete a specific partner",
+                "description": "Delete a specific partner by its id",
+                "operationId": "deletePartner",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the partner to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Partner deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Partner deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -1225,6 +1423,42 @@
                     },
                     "file": {
                         "description": "The file of the music",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePartnerRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the partner",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the partner",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "The image of the partner",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePartnerRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the partner",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the partner",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "The image of the partner",
                         "type": "string",
                         "format": "binary"
                     }
@@ -1404,6 +1638,26 @@
                     "text": {
                         "description": "The text of the offer",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PartnersResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the partner",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "The title of the partner",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the partner",
+                        "type": "string"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageResource"
                     }
                 },
                 "type": "object"

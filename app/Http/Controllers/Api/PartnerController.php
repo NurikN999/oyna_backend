@@ -19,11 +19,52 @@ class PartnerController extends Controller
         $this->imageService = $imageService;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/partners",
+     *     summary="Get all partners",
+     *     description="Get all partners",
+     *     operationId="getPartners",
+     *     tags={"Partners"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/PartnersResource")
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function index()
     {
         return PartnersResource::collection(Partner::paginate(4));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/partners",
+     *     summary="Create a new partner",
+     *     description="Create a new partner and return the partner data",
+     *     operationId="storePartner",
+     *     tags={"Partners"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\RequestBody(
+     *         description="Data for creating a new partner",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/StorePartnerRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Partner created successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/PartnersResource")
+     *     )
+     * )
+     */
     public function store(StorePartnerRequest $request)
     {
         $data = $request->validated();
@@ -40,6 +81,28 @@ class PartnerController extends Controller
         ], 201);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/partners/{id}",
+     *     summary="Get a specific partner",
+     *     description="Get a specific partner by its id",
+     *     operationId="getPartnerById",
+     *     tags={"Partners"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the partner to return",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(ref="#/components/schemas/PartnersResource")
+     *     )
+     * )
+     */
     public function show(Partner $partner)
     {
         return response()->json([
@@ -47,6 +110,33 @@ class PartnerController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/partners/{id}",
+     *     summary="Update a specific partner",
+     *     description="Update a specific partner by its id",
+     *     operationId="updatePartner",
+     *     tags={"Partners"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the partner to update",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Data for updating a partner",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UpdatePartnerRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Partner updated successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/PartnersResource")
+     *     )
+     * )
+     */
     public function update(UpdatePartnerRequest $request, Partner $partner)
     {
         $data = $request->validated();
@@ -67,6 +157,34 @@ class PartnerController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/partners/{id}",
+     *     summary="Delete a specific partner",
+     *     description="Delete a specific partner by its id",
+     *     operationId="deletePartner",
+     *     tags={"Partners"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the partner to delete",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Partner deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Partner deleted successfully"
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function delete(Partner $partner)
     {
         if ($partner->image) {
