@@ -670,10 +670,280 @@
                     }
                 ]
             }
+        },
+        "/api/music": {
+            "get": {
+                "tags": [
+                    "Music"
+                ],
+                "summary": "Get all music",
+                "description": "Get all music",
+                "operationId": "getMusic",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MusicResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Music"
+                ],
+                "summary": "Create a new music",
+                "description": "Create a new music and return the music data",
+                "operationId": "storeMusic",
+                "requestBody": {
+                    "description": "Data for creating a new music",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreMusicRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Music created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Music created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/MusicResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/music/{id}": {
+            "get": {
+                "tags": [
+                    "Music"
+                ],
+                "summary": "Get a specific music",
+                "description": "Get a specific music by its id",
+                "operationId": "getMusicById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the music to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MusicResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Music"
+                ],
+                "summary": "Update a specific music",
+                "description": "Update a specific music by its id",
+                "operationId": "updateMusic",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the music to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for updating a music",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMusicRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Music updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MusicResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Music"
+                ],
+                "summary": "Delete a specific music",
+                "description": "Delete a specific music by its id",
+                "operationId": "deleteMusic",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the music to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Music deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Music deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/music/genres": {
+            "get": {
+                "tags": [
+                    "Music"
+                ],
+                "summary": "Get all music genres",
+                "description": "Get all music genres",
+                "operationId": "getMusicGenres",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MusicGenreType"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
+            "MusicGenreType": {
+                "description": "The genre of the music",
+                "type": "string",
+                "enum": [
+                    "pop",
+                    "rock",
+                    "jazz",
+                    "classic",
+                    "hip_hop",
+                    "electronic"
+                ]
+            },
             "StoreHospitalityVenueRequest": {
                 "properties": {
                     "title": {
@@ -716,6 +986,66 @@
                         "type": "integer"
                     },
                     "image": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreMusicRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the music",
+                        "type": "string"
+                    },
+                    "genre": {
+                        "description": "The genre of the music",
+                        "type": "string",
+                        "enum": [
+                            "pop",
+                            "rock",
+                            "jazz",
+                            "classical",
+                            "country"
+                        ]
+                    },
+                    "image": {
+                        "description": "The image of the music",
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "file": {
+                        "description": "The file of the music",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMusicRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the music",
+                        "type": "string"
+                    },
+                    "genre": {
+                        "description": "The genre of the music",
+                        "type": "string",
+                        "enum": [
+                            "pop",
+                            "rock",
+                            "jazz",
+                            "classical",
+                            "country"
+                        ]
+                    },
+                    "image": {
+                        "description": "The image of the music",
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "file": {
+                        "description": "The file of the music",
                         "type": "string",
                         "format": "binary"
                     }
@@ -857,6 +1187,31 @@
                     "imageable_id": {
                         "type": "integer",
                         "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "MusicResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the music",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "The title of the music",
+                        "type": "string"
+                    },
+                    "genre": {
+                        "description": "The genre of the music",
+                        "type": "string"
+                    },
+                    "path": {
+                        "description": "The URL of the music file",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "The image of the music",
+                        "type": "string"
                     }
                 },
                 "type": "object"

@@ -6,6 +6,35 @@ use App\Enums\MusicGenreType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
+/**
+ * @OA\Schema(
+ *     schema="StoreMusicRequest",
+ *     type="object",
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         description="The title of the music"
+ *     ),
+ *     @OA\Property(
+ *         property="genre",
+ *         type="string",
+ *         description="The genre of the music",
+ *         enum={"pop", "rock", "jazz", "classical", "country"}
+ *     ),
+ *     @OA\Property(
+ *          property="image",
+ *          type="string",
+ *          format="binary",
+ *          description="The image of the music"
+ *      ),
+ *     @OA\Property(
+ *          property="file",
+ *          type="string",
+ *          format="binary",
+ *          description="The file of the music"
+ *      )
+ * )
+ */
 class StoreMusicRequest extends FormRequest
 {
     /**

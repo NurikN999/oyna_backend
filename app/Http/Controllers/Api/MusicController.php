@@ -23,6 +23,52 @@ class MusicController extends Controller
         $this->musicService = $musicService;
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * @param StoreMusicRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     * @OA\Post(
+     *     path="/api/music",
+     *     summary="Create a new music",
+     *     description="Create a new music and return the music data",
+     *     operationId="storeMusic",
+     *     tags={"Music"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\RequestBody(
+     *         description="Data for creating a new music",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/StoreMusicRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Music created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Music created successfully"
+     *             ),
+     *             @OA\Property(
+     *                 property="data",
+     *                 ref="#/components/schemas/MusicResource"
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Bad request"
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function store(StoreMusicRequest $request)
     {
         $data = $request->validated();
@@ -40,6 +86,27 @@ class MusicController extends Controller
         ], 201);
     }
 
+    /**
+    * @OA\Get(
+    *     path="/api/music",
+    *     summary="Get all music",
+    *     description="Get all music",
+    *     operationId="getMusic",
+    *     tags={"Music"},
+    *     security={{"bearerAuth": {}}},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Success",
+    *         @OA\JsonContent(
+    *             @OA\Property(
+    *                 property="data",
+    *                 type="array",
+    *                 @OA\Items(ref="#/components/schemas/MusicResource")
+    *             )
+    *         )
+    *     )
+    * )
+    */
     public function index()
     {
         $musics = Music::paginate(4);
@@ -47,6 +114,28 @@ class MusicController extends Controller
         return MusicResource::collection($musics);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/music/{id}",
+     *     summary="Get a specific music",
+     *     description="Get a specific music by its id",
+     *     operationId="getMusicById",
+     *     tags={"Music"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the music to return",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(ref="#/components/schemas/MusicResource")
+     *     )
+     * )
+    */
     public function show(Music $music)
     {
         return response()->json([
@@ -54,6 +143,33 @@ class MusicController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/music/{id}",
+     *     summary="Update a specific music",
+     *     description="Update a specific music by its id",
+     *     operationId="updateMusic",
+     *     tags={"Music"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the music to update",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Data for updating a music",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateMusicRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Music updated successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/MusicResource")
+     *     )
+     * )
+     */
     public function update(UpdateMusicRequest $request, Music $music)
     {
         $data = $request->validated();
@@ -75,6 +191,34 @@ class MusicController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/music/{id}",
+     *     summary="Delete a specific music",
+     *     description="Delete a specific music by its id",
+     *     operationId="deleteMusic",
+     *     tags={"Music"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the music to delete",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Music deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Music deleted successfully"
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function destroy(Music $music)
     {
         $this->musicService->delete($music->path);
@@ -85,6 +229,27 @@ class MusicController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/music/genres",
+     *     summary="Get all music genres",
+     *     description="Get all music genres",
+     *     operationId="getMusicGenres",
+     *     tags={"Music"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/MusicGenreType")
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function genres()
     {
         return response()->json([

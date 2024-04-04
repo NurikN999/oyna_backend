@@ -4,6 +4,21 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+/**
+ * @OA\Schema(
+ *     schema="MusicGenreType",
+ *     type="string",
+ *     description="The genre of the music",
+ *     enum={"pop", "rock", "jazz", "classic", "hip_hop", "electronic"}
+ * )
+ * @method static static POP()
+ * @method static static ROCK()
+ * @method static static JAZZ()
+ * @method static static CLASSIC()
+ * @method static static HIP_HOP()
+ * @method static static ELECTRONIC()
+ * @method static array all()
+ */
 enum MusicGenreType: string
 {
     case POP = 'pop';
