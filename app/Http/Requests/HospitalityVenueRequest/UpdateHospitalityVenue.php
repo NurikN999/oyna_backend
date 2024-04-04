@@ -6,6 +6,37 @@ use App\Enums\HospitalityVenueType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
+/**
+ * @OA\Schema(
+ *     schema="UpdateHospitalityVenue",
+ *     type="object",
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *     ),
+ *     @OA\Property(
+ *         property="address",
+ *         type="string",
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *     ),
+ *     @OA\Property(
+ *        property="city_id",
+ *       type="integer",
+ *    ),
+ *   @OA\Property(
+ *     property="image",
+ *   type="string",
+ * format="binary"
+ *   )
+ * )
+ */
 class UpdateHospitalityVenue extends FormRequest
 {
     /**
