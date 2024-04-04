@@ -928,6 +928,185 @@
                     }
                 ]
             }
+        },
+        "/api/offers": {
+            "get": {
+                "tags": [
+                    "Offers"
+                ],
+                "summary": "Get offers",
+                "description": "Get offers",
+                "operationId": "showAllOffers",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OfferResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Offers"
+                ],
+                "summary": "Create a new offer",
+                "description": "Create a new offer and return the offer data",
+                "operationId": "storeOffer",
+                "requestBody": {
+                    "description": "Data for creating a new offer",
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Offer created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OfferResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/offers/{id}": {
+            "get": {
+                "tags": [
+                    "Offers"
+                ],
+                "summary": "Get a specific offer",
+                "description": "Get a specific offer by its id",
+                "operationId": "getOfferById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the offer to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OfferResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Offers"
+                ],
+                "summary": "Update a specific offer",
+                "description": "Update a specific offer by its id",
+                "operationId": "updateOffer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the offer to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for updating an offer",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Offer updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OfferResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Offers"
+                ],
+                "summary": "Delete a specific offer",
+                "description": "Delete a specific offer by its id",
+                "operationId": "deleteOffer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the offer to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Offer deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Offer deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -1211,6 +1390,19 @@
                     },
                     "image": {
                         "description": "The image of the music",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OfferResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the offer",
+                        "type": "integer"
+                    },
+                    "text": {
+                        "description": "The text of the offer",
                         "type": "string"
                     }
                 },
