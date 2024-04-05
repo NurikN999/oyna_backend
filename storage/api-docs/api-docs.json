@@ -1305,6 +1305,204 @@
                     }
                 ]
             }
+        },
+        "/api/prizes": {
+            "get": {
+                "tags": [
+                    "Prizes"
+                ],
+                "summary": "Get all prizes",
+                "description": "Get all prizes",
+                "operationId": "getPrizes",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PrizeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Prizes"
+                ],
+                "summary": "Create a new prize",
+                "description": "Create a new prize and return the prize data",
+                "operationId": "storePrize",
+                "requestBody": {
+                    "description": "Data for creating a new prize",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePrizeRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Prize created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrizeResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/prizes/{id}": {
+            "get": {
+                "tags": [
+                    "Prizes"
+                ],
+                "summary": "Get a specific prize",
+                "description": "Get a specific prize by its id",
+                "operationId": "getPrizeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the prize to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrizeResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Prizes"
+                ],
+                "summary": "Update a specific prize",
+                "description": "Update a specific prize by its id",
+                "operationId": "updatePrize",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the prize to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for updating a prize",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePrizeRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Prize updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrizeResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Prizes"
+                ],
+                "summary": "Delete a specific prize",
+                "description": "Delete a specific prize by its id",
+                "operationId": "deletePrize",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the prize to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Prize deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prize deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -1459,6 +1657,42 @@
                     },
                     "image": {
                         "description": "The image of the partner",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePrizeRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the prize",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the prize",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "The image of the prize",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePrizeRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the prize",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the prize",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "The image of the prize",
                         "type": "string",
                         "format": "binary"
                     }
@@ -1654,6 +1888,26 @@
                     },
                     "description": {
                         "description": "The description of the partner",
+                        "type": "string"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageResource"
+                    }
+                },
+                "type": "object"
+            },
+            "PrizeResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the prize",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "The title of the prize",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the prize",
                         "type": "string"
                     },
                     "image": {
