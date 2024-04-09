@@ -30,7 +30,7 @@ class MusicController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      * @OA\Post(
-     *     path="/api/music",
+     *     path="/api/musics",
      *     summary="Create a new music",
      *     description="Create a new music and return the music data",
      *     operationId="storeMusic",
@@ -88,7 +88,7 @@ class MusicController extends Controller
 
     /**
     * @OA\Get(
-    *     path="/api/music",
+    *     path="/api/musics",
     *     summary="Get all music",
     *     description="Get all music",
     *     operationId="getMusic",
@@ -116,7 +116,7 @@ class MusicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/music/{id}",
+     *     path="/api/musics/{id}",
      *     summary="Get a specific music",
      *     description="Get a specific music by its id",
      *     operationId="getMusicById",
@@ -145,7 +145,7 @@ class MusicController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/music/{id}",
+     *     path="/api/musics/{id}",
      *     summary="Update a specific music",
      *     description="Update a specific music by its id",
      *     operationId="updateMusic",

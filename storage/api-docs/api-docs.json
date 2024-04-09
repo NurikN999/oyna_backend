@@ -5,6 +5,160 @@
         "version": "0.1"
     },
     "paths": {
+        "/api/advertisings": {
+            "get": {
+                "tags": [
+                    "Advertisings"
+                ],
+                "summary": "Get list of advertisings",
+                "description": "Get list of advertisings",
+                "operationId": "getAllAdvertisings",
+                "responses": {
+                    "200": {
+                        "description": "List of advertisings",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AdvertisingResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Advertisings"
+                ],
+                "summary": "Create advertising",
+                "description": "Create advertising",
+                "operationId": "storeAdvertising",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAdvertisingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Advertising created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/AdvertisingResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/advertisings/{advertising}": {
+            "get": {
+                "tags": [
+                    "Advertisings"
+                ],
+                "summary": "Get advertising by id",
+                "description": "Get advertising by id",
+                "operationId": "showAdvertising",
+                "parameters": [
+                    {
+                        "name": "advertising",
+                        "in": "path",
+                        "description": "Advertising id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Advertising retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AdvertisingResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Advertisings"
+                ],
+                "summary": "Update advertising",
+                "description": "Update advertising",
+                "operationId": "updateAdvertising",
+                "parameters": [
+                    {
+                        "name": "advertising",
+                        "in": "path",
+                        "description": "Advertising id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAdvertisingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Advertising updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/cities": {
             "get": {
                 "tags": [
@@ -671,7 +825,7 @@
                 ]
             }
         },
-        "/api/music": {
+        "/api/musics": {
             "get": {
                 "tags": [
                     "Music"
@@ -767,7 +921,7 @@
                 ]
             }
         },
-        "/api/music/{id}": {
+        "/api/musics/{id}": {
             "get": {
                 "tags": [
                     "Music"
@@ -850,7 +1004,9 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/music/{id}": {
             "delete": {
                 "tags": [
                     "Music"
@@ -1519,6 +1675,43 @@
                     "electronic"
                 ]
             },
+            "StoreAdvertisingRequest": {
+                "required": [
+                    "title",
+                    "placement_area",
+                    "play_time",
+                    "description",
+                    "video"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Advertising title"
+                    },
+                    "placement_area": {
+                        "type": "string",
+                        "example": "Advertising placement area"
+                    },
+                    "play_time": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2021-10-10"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Advertising description"
+                    },
+                    "video": {
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "video_link": {
+                        "type": "string",
+                        "example": "http://example.com/video.mp4"
+                    }
+                },
+                "type": "object"
+            },
             "StoreHospitalityVenueRequest": {
                 "properties": {
                     "title": {
@@ -1695,6 +1888,36 @@
                         "description": "The image of the prize",
                         "type": "string",
                         "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "AdvertisingResource": {
+                "title": "AdvertisingResource",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Advertising title"
+                    },
+                    "placement_area": {
+                        "type": "string",
+                        "example": "Placement area"
+                    },
+                    "play_time": {
+                        "type": "integer",
+                        "example": "30"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Advertising description"
+                    },
+                    "video_path": {
+                        "type": "string",
+                        "example": "http://oynapp.kz/storage/videos/1.mp4"
                     }
                 },
                 "type": "object"
