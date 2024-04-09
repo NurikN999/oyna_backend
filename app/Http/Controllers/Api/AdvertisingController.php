@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdvertisingRequest\StoreAdvertisingRequest;
+use App\Http\Requests\AdvertisingRequest\UpdateAdvertisingRequest;
 use App\Http\Resources\Api\AdvertisingResource;
 use App\Models\Advertising;
 use App\Services\Api\VideoService;
@@ -122,12 +123,64 @@ class AdvertisingController extends Controller
      * @param StoreAdvertisingRequest $request
      * @param Advertising $advertising
      * @return \Illuminate\Http\JsonResponse
-     * @OA\Put(
+     * @OA\Patch(
      *   path="/api/advertisings/{advertising}",
      *   tags={"Advertisings"},
      *   summary="Update advertising",
      *   description="Update advertising",
      *   operationId="updateAdvertising",
+     *   @OA\Parameter(
+     *     name="advertising",
+     *     in="path",
+     *     description="Advertising id",
+     *     required=true,
+     *     @OA\Schema(
+     *       type="integer",
+     *       format="int64"
+     *     )
+     *   ),
+     *   @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(ref="#/components/schemas/StoreAdvertisingRequest")
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Advertising updated successfully",
+     *     @OA\JsonContent(
+     *       @OA\Property(property="message", type="string"),
+     *     )
+     *   )
+     * )
+     */
+    public function update(UpdateAdvertisingRequest $request, Advertising $advertising)
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('video')) {
+            Storage::disk('public')->delete($advertising->video_path);
+            $data['video_path'] = $this->videoService->upload($request->file('video'));
+        } else {
+            $data['video_path'] = $request->input('video_link');
+        }
+
+        $advertising->update($data);
+
+        return response()->json([
+            'message' => 'Advertising updated successfully'
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param StoreAdvertisingRequest $request
+     * @param Advertising $advertising
+     * @return \Illuminate\Http\JsonResponse
+     * @OA\Put(
+     *   path="/api/advertisings/{advertising}",
+     *   tags={"Advertisings"},
+     *   summary="Update advertising",
+     *   description="Update advertising",
+     *   operationId="deleteAdvertising",
      *   @OA\Parameter(
      *     name="advertising",
      *     in="path",

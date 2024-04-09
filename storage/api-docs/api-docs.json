@@ -117,6 +117,53 @@
                 ],
                 "summary": "Update advertising",
                 "description": "Update advertising",
+                "operationId": "deleteAdvertising",
+                "parameters": [
+                    {
+                        "name": "advertising",
+                        "in": "path",
+                        "description": "Advertising id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAdvertisingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Advertising updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Advertisings"
+                ],
+                "summary": "Update advertising",
+                "description": "Update advertising",
                 "operationId": "updateAdvertising",
                 "parameters": [
                     {
@@ -1711,6 +1758,18 @@
                     }
                 },
                 "type": "object"
+            },
+            "UpdateAdvertisingRequest": {
+                "title": "UpdateAdvertisingRequest",
+                "description": "Update advertising request",
+                "required": [
+                    "title",
+                    "placement_area",
+                    "play_time",
+                    "description",
+                    "video",
+                    "video_link"
+                ]
             },
             "StoreHospitalityVenueRequest": {
                 "properties": {

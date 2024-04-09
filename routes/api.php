@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdvertisingController;
 use App\Http\Controllers\Api\HospitalityVenueController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
@@ -89,6 +90,14 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/{prize}', [PrizeController::class, 'show']);
         Route::patch('/{prize}', [PrizeController::class, 'update']);
         Route::delete('/{prize}', [PrizeController::class, 'destroy']);
+    });
+
+    Route::prefix('advertisings')->group(function () {
+        Route::post('/', [AdvertisingController::class, 'store']);
+        Route::get('/', [AdvertisingController::class, 'index']);
+        Route::get('/{advertising}', [AdvertisingController::class, 'show']);
+        Route::patch('/{advertising}', [AdvertisingController::class, 'update']);
+        Route::delete('/{advertising}', [AdvertisingController::class, 'destroy']);
     });
 
 });
