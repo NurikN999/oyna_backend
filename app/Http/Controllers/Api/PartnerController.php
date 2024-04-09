@@ -188,7 +188,7 @@ class PartnerController extends Controller
     public function delete(Partner $partner)
     {
         if ($partner->image) {
-            $this->imageService->delete($partner->image->id);
+            $this->imageService->delete($partner->image);
         }
 
         $partner->delete();
