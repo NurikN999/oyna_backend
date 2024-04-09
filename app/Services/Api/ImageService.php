@@ -13,7 +13,7 @@ class ImageService
     {
         $path = $file->store('images', 'public');
         $image = Image::create([
-            'path' => 'http://oynapp.kz/' . $path,
+            'path' => 'http://oynapp.kz/storage/' . $path,
             'imageable_type' => $imageableType,
             'imageable_id' => $imageableId
         ]);

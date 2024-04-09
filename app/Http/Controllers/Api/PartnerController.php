@@ -143,7 +143,7 @@ class PartnerController extends Controller
 
         if ($request->hasFile('image')) {
             if ($partner->image) {
-                $this->imageService->delete($partner->image->id);
+                $this->imageService->delete($partner->image);
             }
 
             $this->imageService->upload($request->file('image'), Partner::class, $partner->id);
