@@ -27,13 +27,42 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::prefix('cities')->group(function () {
+    Route::get('/', [CityController::class, 'index']);
+    Route::get('/{city}', [CityController::class, 'show']);
+});
+Route::prefix('entertainments')->group(function () {
+    Route::get('/', [EntertainmentController::class, 'index']);
+    Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
+});
+Route::prefix('musics')->group(function () {
+    Route::get('/genres', [MusicController::class, 'genres']);
+    Route::get('/', [MusicController::class, 'index']);
+    Route::get('/{music}', [MusicController::class, 'show']);
+});
+Route::prefix('hospitality-venues')->group(function () {
+    Route::get('/types', [HospitalityVenueController::class, 'types']);
+    Route::get('/', [HospitalityVenueController::class, 'index']);
+    Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
+});
+Route::prefix('partners')->group(function () {
+    Route::get('/', [PartnerController::class, 'index']);
+    Route::get('/{partner}', [PartnerController::class, 'show']);
+});
+Route::prefix('offers')->group(function () {
+    Route::get('/', [OfferController::class, 'index']);
+    Route::get('/{offer}', [OfferController::class, 'show']);
+});
+Route::prefix('prizes')->group(function () {
+    Route::get('/', [PrizeController::class, 'index']);
+    Route::get('/{prize}', [PrizeController::class, 'show']);
+});
+Route::prefix('advertisings')->group(function () {
+    Route::get('/', [AdvertisingController::class, 'index']);
+    Route::get('/{advertising}', [AdvertisingController::class, 'show']);
+});
 
 Route::middleware('jwt.auth')->group(function () {
-
-    Route::prefix('cities')->group(function () {
-        Route::get('/', [CityController::class, 'index']);
-        Route::get('/{city}', [CityController::class, 'show']);
-    });
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
@@ -44,58 +73,42 @@ Route::middleware('jwt.auth')->group(function () {
 
     Route::prefix('entertainments')->group(function () {
         Route::post('/', [EntertainmentController::class, 'store']);
-        Route::get('/', [EntertainmentController::class, 'index']);
-        Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
         Route::patch('/{entertainment}', [EntertainmentController::class, 'update']);
         Route::delete('/{entertainment}', [EntertainmentController::class, 'destroy']);
     });
 
     Route::prefix('musics')->group(function () {
-        Route::get('/genres', [MusicController::class, 'genres']);
         Route::post('/', [MusicController::class, 'store']);
-        Route::get('/', [MusicController::class, 'index']);
-        Route::get('/{music}', [MusicController::class, 'show']);
         Route::patch('/{music}', [MusicController::class, 'update']);
         Route::delete('/{music}', [MusicController::class, 'destroy']);
     });
 
     Route::prefix('hospitality-venues')->group(function () {
         Route::post('/', [HospitalityVenueController::class, 'store']);
-        Route::get('/types', [HospitalityVenueController::class, 'types']);
-        Route::get('/', [HospitalityVenueController::class, 'index']);
-        Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
         Route::patch('/{hospitalityVenue}', [HospitalityVenueController::class, 'update']);
         Route::delete('/{hospitalityVenue}', [HospitalityVenueController::class, 'delete']);
     });
 
     Route::prefix('partners')->group(function () {
         Route::post('/', [PartnerController::class, 'store']);
-        Route::get('/', [PartnerController::class, 'index']);
-        Route::get('/{partner}', [PartnerController::class, 'show']);
         Route::patch('/{partner}', [PartnerController::class, 'update']);
         Route::delete('/{partner}', [PartnerController::class, 'delete']);
     });
 
     Route::prefix('offers')->group(function () {
         Route::post('/', [OfferController::class, 'store']);
-        Route::get('/', [OfferController::class, 'index']);
-        Route::get('/{offer}', [OfferController::class, 'show']);
         Route::patch('/{offer}', [OfferController::class, 'update']);
         Route::delete('/{offer}', [OfferController::class, 'destroy']);
     });
 
     Route::prefix('prizes')->group(function () {
         Route::post('/', [PrizeController::class, 'store']);
-        Route::get('/', [PrizeController::class, 'index']);
-        Route::get('/{prize}', [PrizeController::class, 'show']);
         Route::patch('/{prize}', [PrizeController::class, 'update']);
         Route::delete('/{prize}', [PrizeController::class, 'destroy']);
     });
 
     Route::prefix('advertisings')->group(function () {
         Route::post('/', [AdvertisingController::class, 'store']);
-        Route::get('/', [AdvertisingController::class, 'index']);
-        Route::get('/{advertising}', [AdvertisingController::class, 'show']);
         Route::patch('/{advertising}', [AdvertisingController::class, 'update']);
         Route::delete('/{advertising}', [AdvertisingController::class, 'destroy']);
     });
