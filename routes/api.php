@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\HospitalityVenueController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\EntertainmentController;
+use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\OfferController;
@@ -60,6 +61,10 @@ Route::prefix('prizes')->group(function () {
 Route::prefix('advertisings')->group(function () {
     Route::get('/', [AdvertisingController::class, 'index']);
     Route::get('/{advertising}', [AdvertisingController::class, 'show']);
+});
+Route::prefix('games')->group(function () {
+    Route::get('/', [GameController::class, 'index']);
+    Route::get('/{game}', [GameController::class, 'show']);
 });
 
 Route::middleware('jwt.auth')->group(function () {

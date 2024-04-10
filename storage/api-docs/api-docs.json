@@ -605,6 +605,64 @@
                 }
             }
         },
+        "/api/games": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get a list of games",
+                "description": "Get a paginated list of games",
+                "operationId": "getGames",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GameResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/games/{id}": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get a specific game",
+                "description": "Get a specific game by its id",
+                "operationId": "getGameById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the game to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GameResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/hospitality-venues": {
             "get": {
                 "tags": [
@@ -2050,6 +2108,24 @@
                     }
                 },
                 "type": "object"
+            },
+            "GameResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "GameResourceCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/GameResource"
+                }
             },
             "HospitalityVenueResource": {
                 "required": [
