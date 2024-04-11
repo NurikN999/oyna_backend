@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdvertisingController;
 use App\Http\Controllers\Api\HospitalityVenueController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\DifferenceController;
 use App\Http\Controllers\Api\EntertainmentController;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\UserController;
@@ -73,6 +74,11 @@ Route::prefix('quiz-questions')->group(function () {
     Route::get('/{quizQuestion}', [QuizQuestionController::class, 'show']);
 });
 
+Route::prefix('differences')->group(function () {
+    Route::get('/', [DifferenceController::class, 'index']);
+    Route::get('/{difference}', [DifferenceController::class, 'show']);
+});
+
 Route::middleware('jwt.auth')->group(function () {
 
     Route::prefix('users')->group(function () {
@@ -128,6 +134,12 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('/', [QuizQuestionController::class, 'store']);
         Route::patch('/{quizQuestion}', [QuizQuestionController::class, 'update']);
         Route::delete('/{quizQuestion}', [QuizQuestionController::class, 'destroy']);
+    });
+
+    Route::prefix('differences')->group(function () {
+        Route::post('/', [DifferenceController::class, 'store']);
+        Route::patch('/{difference}', [DifferenceController::class, 'update']);
+        Route::delete('/{difference}', [DifferenceController::class, 'destroy']);
     });
 
 });

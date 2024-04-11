@@ -28,6 +28,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         property="quiz",
  *         ref="#/components/schemas/QuizQuestionResource",
  *         description="The quiz associated with the game (if type is 'Quiz')"
+ *     ),
+ *     @OA\Property(
+ *         property="difference",
+ *         ref="#/components/schemas/DifferenceResource",
+ *         description="The differences associated with the game (if type is 'Difference')"
  *     )
  * )
  * @OA\Schema(
@@ -53,6 +58,10 @@ class GameResource extends JsonResource
 
         if ($this->type === 'quiz') {
             $data['questions'] = QuizQuestionResource::collection($this->questions);
+        }
+
+        if ($this->type === 'difference') {
+            $data['differences'] = DifferenceResource::collection($this->differences);
         }
 
         return $data;

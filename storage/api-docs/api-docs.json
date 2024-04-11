@@ -283,6 +283,151 @@
                 ]
             }
         },
+        "/differences": {
+            "get": {
+                "tags": [
+                    "Differences"
+                ],
+                "summary": "Get all differences",
+                "operationId": "1a602ca2958694233dce3c91bb42f9fa",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DifferenceResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Differences"
+                ],
+                "summary": "Create a new difference",
+                "operationId": "402409e0fc7d9d8773f0f39f3d1cb839",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreDifferenceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DifferenceResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/differences/{id}": {
+            "get": {
+                "tags": [
+                    "Differences"
+                ],
+                "summary": "Get a specific difference",
+                "operationId": "dae3633427020031dc764a8c65a16ee9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DifferenceResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Differences"
+                ],
+                "summary": "Delete a specific difference",
+                "operationId": "0d8e8e9c952b0e326a82cf0f897a7ca4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Differences"
+                ],
+                "summary": "Update a specific difference",
+                "operationId": "daa39b97b3ec16d764d23cdb5a97d832",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDifferenceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DifferenceResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/entertainments": {
             "get": {
                 "tags": [
@@ -2010,6 +2155,96 @@
                     "video_link"
                 ]
             },
+            "StoreDifferenceRequest": {
+                "required": [
+                    "game_level",
+                    "coordinates"
+                ],
+                "properties": {
+                    "game_level": {
+                        "description": "The level of the game",
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "coordinates": {
+                        "description": "The coordinates of the difference",
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "x1",
+                                "y1",
+                                "x2",
+                                "y2"
+                            ],
+                            "properties": {
+                                "x1": {
+                                    "type": "integer",
+                                    "example": 10
+                                },
+                                "y1": {
+                                    "type": "integer",
+                                    "example": 20
+                                },
+                                "x2": {
+                                    "type": "integer",
+                                    "example": 30
+                                },
+                                "y2": {
+                                    "type": "integer",
+                                    "example": 40
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateDifferenceRequest": {
+                "required": [
+                    "game_level",
+                    "coordinates"
+                ],
+                "properties": {
+                    "game_level": {
+                        "description": "The level of the game",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "coordinates": {
+                        "description": "The coordinates of the difference",
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "x1",
+                                "y1",
+                                "x2",
+                                "y2"
+                            ],
+                            "properties": {
+                                "x1": {
+                                    "type": "integer",
+                                    "example": 10
+                                },
+                                "y1": {
+                                    "type": "integer",
+                                    "example": 20
+                                },
+                                "x2": {
+                                    "type": "integer",
+                                    "example": 30
+                                },
+                                "y2": {
+                                    "type": "integer",
+                                    "example": 40
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "StoreHospitalityVenueRequest": {
                 "properties": {
                     "title": {
@@ -2316,6 +2551,58 @@
                 },
                 "type": "object"
             },
+            "CoordinateResource": {
+                "properties": {
+                    "x1": {
+                        "description": "The x1 coordinate",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "y1": {
+                        "description": "The y1 coordinate",
+                        "type": "integer",
+                        "example": 20
+                    },
+                    "x2": {
+                        "description": "The x2 coordinate",
+                        "type": "integer",
+                        "example": 30
+                    },
+                    "y2": {
+                        "description": "The y2 coordinate",
+                        "type": "integer",
+                        "example": 40
+                    }
+                },
+                "type": "object"
+            },
+            "DifferenceResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the difference",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "game_level": {
+                        "description": "The level of the game",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "game_id": {
+                        "description": "The ID of the game",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "coordinates": {
+                        "description": "The coordinates of the difference",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CoordinateResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "EntertainmentResource": {
                 "required": [
                     "id",
@@ -2373,6 +2660,9 @@
                     },
                     "quiz": {
                         "$ref": "#/components/schemas/QuizQuestionResource"
+                    },
+                    "difference": {
+                        "$ref": "#/components/schemas/DifferenceResource"
                     }
                 },
                 "type": "object"
