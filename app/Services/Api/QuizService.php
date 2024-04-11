@@ -41,4 +41,28 @@ class QuizService
         }
     }
 
+    public function updateQuizQuestion(QuizQuestion $quizQuestion, array $data): QuizQuestion
+    {
+        $quizQuestion->update($data);
+
+        return $quizQuestion;
+    }
+
+    public function updateOptions(QuizQuestion $quizQuestion, array $options): void
+    {
+        foreach ($options as $option) {
+            $quizQuestion->options()->updateOrCreate(
+                ['id' => $option['id']],
+                [
+                    'text' => $option['text'],
+                    'is_correct' => $option['is_correct'],
+                ]
+            );
+
+            if ($option['image']) {
+                $this->imageService->upload($option['image'], Option::class, $option['id']);
+            }
+        }
+    }
+
 }

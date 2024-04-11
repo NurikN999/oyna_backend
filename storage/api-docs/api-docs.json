@@ -1829,6 +1829,122 @@
                     }
                 ]
             }
+        },
+        "/api/quiz-questions/{quizQuestion}": {
+            "get": {
+                "tags": [
+                    "QuizQuestions"
+                ],
+                "summary": "Get a quiz question",
+                "description": "Get a quiz question by ID",
+                "operationId": "getQuizQuestion",
+                "parameters": [
+                    {
+                        "name": "quizQuestion",
+                        "in": "path",
+                        "description": "The ID of the quiz question",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuizQuestionResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "QuizQuestions"
+                ],
+                "summary": "Delete a quiz question",
+                "description": "Delete a quiz question by ID",
+                "operationId": "deleteQuizQuestion",
+                "parameters": [
+                    {
+                        "name": "quizQuestion",
+                        "in": "path",
+                        "description": "The ID of the quiz question",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "QuizQuestions"
+                ],
+                "summary": "Update a quiz question",
+                "description": "Update a quiz question and its options",
+                "operationId": "updateQuizQuestion",
+                "parameters": [
+                    {
+                        "name": "quizQuestion",
+                        "in": "path",
+                        "description": "The ID of the quiz question",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateQuizQuestionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuizQuestionResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2076,6 +2192,40 @@
             },
             "StoreQuizQuestion": {
                 "title": "StoreQuizQuestion",
+                "required": [
+                    "text",
+                    "options"
+                ],
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "example": "What is the capital of France?"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "text": {
+                                    "type": "string",
+                                    "example": "Paris"
+                                },
+                                "is_correct": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "image": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateQuizQuestionRequest": {
+                "title": "UpdateQuizQuestionRequest",
                 "required": [
                     "text",
                     "options"

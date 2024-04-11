@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PartnerController;
 use App\Http\Controllers\Api\PrizeController;
+use App\Http\Controllers\Api\QuizQuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,11 @@ Route::prefix('games')->group(function () {
     Route::get('/{game}', [GameController::class, 'show']);
 });
 
+Route::prefix('quiz-questions')->group(function () {
+    Route::get('/', [QuizQuestionController::class, 'index']);
+    Route::get('/{quizQuestion}', [QuizQuestionController::class, 'show']);
+});
+
 Route::middleware('jwt.auth')->group(function () {
 
     Route::prefix('users')->group(function () {
@@ -116,6 +122,12 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('/', [AdvertisingController::class, 'store']);
         Route::patch('/{advertising}', [AdvertisingController::class, 'update']);
         Route::delete('/{advertising}', [AdvertisingController::class, 'destroy']);
+    });
+
+    Route::prefix('quiz-questions')->group(function () {
+        Route::post('/', [QuizQuestionController::class, 'store']);
+        Route::patch('/{quizQuestion}', [QuizQuestionController::class, 'update']);
+        Route::delete('/{quizQuestion}', [QuizQuestionController::class, 'destroy']);
     });
 
 });
