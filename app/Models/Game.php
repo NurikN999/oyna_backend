@@ -12,4 +12,9 @@ class Game extends Model
     protected $fillable = [
         'type'
     ];
+
+    public function quizQuestions()
+    {
+        return $this->hasMany(QuizQuestion::class);
+    }
 }

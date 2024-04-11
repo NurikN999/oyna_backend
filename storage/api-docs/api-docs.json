@@ -1764,6 +1764,71 @@
                     }
                 ]
             }
+        },
+        "/api/quiz-questions": {
+            "get": {
+                "tags": [
+                    "QuizQuestions"
+                ],
+                "summary": "Get a list of quiz questions",
+                "description": "Get a paginated list of quiz questions",
+                "operationId": "getQuizQuestions",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/QuizQuestionResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "QuizQuestions"
+                ],
+                "summary": "Create a new quiz question",
+                "description": "Create a new quiz question and its options",
+                "operationId": "storeQuizQuestion",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreQuizQuestion"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuizQuestionResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2009,6 +2074,40 @@
                 },
                 "type": "object"
             },
+            "StoreQuizQuestion": {
+                "title": "StoreQuizQuestion",
+                "required": [
+                    "text",
+                    "options"
+                ],
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "example": "What is the capital of France?"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "text": {
+                                    "type": "string",
+                                    "example": "Paris"
+                                },
+                                "is_correct": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "image": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "AdvertisingResource": {
                 "title": "AdvertisingResource",
                 "properties": {
@@ -2112,16 +2211,24 @@
             "GameResource": {
                 "properties": {
                     "id": {
+                        "description": "The ID of the game",
                         "type": "integer",
-                        "format": "int64"
+                        "format": "int64",
+                        "example": 1
                     },
                     "type": {
-                        "type": "string"
+                        "description": "The type of the game",
+                        "type": "string",
+                        "example": "Quiz"
+                    },
+                    "quiz": {
+                        "$ref": "#/components/schemas/QuizQuestionResource"
                     }
                 },
                 "type": "object"
             },
             "GameResourceCollection": {
+                "description": "A collection of games",
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/GameResource"
@@ -2234,6 +2341,37 @@
                 },
                 "type": "object"
             },
+            "OptionResource": {
+                "required": [
+                    "id",
+                    "text",
+                    "is_correct",
+                    "quiz_question_id",
+                    "image"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "text": {
+                        "type": "string",
+                        "example": "Option 1"
+                    },
+                    "is_correct": {
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "quiz_question_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageResource"
+                    }
+                },
+                "type": "object"
+            },
             "PartnersResource": {
                 "properties": {
                     "id": {
@@ -2270,6 +2408,33 @@
                     },
                     "image": {
                         "$ref": "#/components/schemas/ImageResource"
+                    }
+                },
+                "type": "object"
+            },
+            "QuizQuestionResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the quiz question",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "text": {
+                        "description": "The text of the quiz question",
+                        "type": "string",
+                        "example": "What is the capital of France?"
+                    },
+                    "quiz_id": {
+                        "description": "The ID of the quiz that the question belongs to",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "options": {
+                        "description": "The options of the quiz question",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OptionResource"
+                        }
                     }
                 },
                 "type": "object"

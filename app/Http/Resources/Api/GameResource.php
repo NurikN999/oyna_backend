@@ -9,22 +9,32 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @mixin \App\Models\Game
  * @psalm-suppress MissingReturnType
  * @OA\Schema(
- *    schema="GameResource",
- *   @OA\Property(
- *    property="id",
- *   type="integer",
- *  format="int64",
- * ),
- * @OA\Property(
- *   property="type",
- * type="string",
- * ),
+ *     schema="GameResource",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="The ID of the game",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         description="The type of the game",
+ *         example="Quiz"
+ *     ),
+ *     @OA\Property(
+ *         property="quiz",
+ *         ref="#/components/schemas/QuizQuestionResource",
+ *         description="The quiz associated with the game (if type is 'Quiz')"
+ *     )
  * )
  * @OA\Schema(
- *   schema="GameResourceCollection",
- * type="array",
- * @OA\Items(ref="#/components/schemas/GameResource"),
- * )
+ *     schema="GameResourceCollection",
+ *     type="array",
+ *     @OA\Items(ref="#/components/schemas/GameResource"),
+ *     description="A collection of games"
  * )
  */
 class GameResource extends JsonResource
@@ -36,9 +46,15 @@ class GameResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'type' => $this->type,
         ];
+
+        if ($this->type === 'quiz') {
+            $data['questions'] = QuizQuestionResource::collection($this->questions);
+        }
+
+        return $data;
     }
 }
