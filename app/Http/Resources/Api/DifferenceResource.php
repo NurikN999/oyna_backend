@@ -32,6 +32,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         type="array",
  *         @OA\Items(ref="#/components/schemas/CoordinateResource"),
  *         description="The coordinates of the difference"
+ *     ),
+ *     @OA\Property(
+ *         property="images",
+ *         type="array",
+ *         @OA\Items(ref="#/components/schemas/ImageResource"),
+ *         description="The images of the difference"
  *     )
  * )
  */
@@ -49,6 +55,7 @@ class DifferenceResource extends JsonResource
             'game_level' => $this->game_level,
             'game_id' => $this->game_id,
             'coordinates' => CoordinateResource::collection($this->coordinates),
+            'images' => ImageResource::collection($this->images),
         ];
     }
 }

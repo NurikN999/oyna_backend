@@ -2599,6 +2599,13 @@
                         "items": {
                             "$ref": "#/components/schemas/CoordinateResource"
                         }
+                    },
+                    "images": {
+                        "description": "The images of the difference",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ImageResource"
+                        }
                     }
                 },
                 "type": "object"
