@@ -36,6 +36,7 @@ Route::prefix('cities')->group(function () {
 });
 Route::prefix('entertainments')->group(function () {
     Route::get('/', [EntertainmentController::class, 'index']);
+    Route::get('/types', [EntertainmentController::class, 'types']);
     Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
 });
 Route::prefix('musics')->group(function () {
@@ -92,7 +93,6 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('/', [EntertainmentController::class, 'store']);
         Route::patch('/{entertainment}', [EntertainmentController::class, 'update']);
         Route::delete('/{entertainment}', [EntertainmentController::class, 'destroy']);
-        Route::get('/types', [EntertainmentController::class, 'types']);
     });
 
     Route::prefix('musics')->group(function () {
