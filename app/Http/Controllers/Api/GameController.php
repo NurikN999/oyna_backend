@@ -28,7 +28,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::paginate(10);
+        $games = Game::all();
 
         return response()->json([
             'data' => GameResource::collection($games),

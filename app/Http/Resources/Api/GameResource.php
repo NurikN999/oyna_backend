@@ -56,11 +56,11 @@ class GameResource extends JsonResource
             'type' => $this->type,
         ];
 
-        if ($this->type === 'quiz') {
+        if ($this->type === 'quiz' && $this->questions !== null) {
             $data['questions'] = QuizQuestionResource::collection($this->questions);
         }
 
-        if ($this->type === 'difference') {
+        if ($this->type === 'difference' && $this->differences !== null) {
             $data['differences'] = DifferenceResource::collection($this->differences);
         }
 
