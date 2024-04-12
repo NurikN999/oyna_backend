@@ -6,6 +6,62 @@ use App\Http\Resources\Api\CityResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @OA\Schema(
+ *     schema="UserResource",
+ *     type="object",
+ *     title="UserResource",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         description="User id"
+ *     ),
+ *     @OA\Property(
+ *         property="first_name",
+ *         type="string",
+ *         description="User first name"
+ *     ),
+ *     @OA\Property(
+ *         property="last_name",
+ *         type="string",
+ *         description="User last name"
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         description="User email"
+ *     ),
+ *     @OA\Property(
+ *         property="age",
+ *         type="integer",
+ *         description="User age"
+ *     ),
+ *     @OA\Property(
+ *         property="interests",
+ *         type="string",
+ *         description="User interests"
+ *     ),
+ *     @OA\Property(
+ *         property="teams",
+ *         type="string",
+ *         description="User teams"
+ *     ),
+ *     @OA\Property(
+ *         property="is_active",
+ *         type="boolean",
+ *         description="User is active"
+ *     ),
+ *     @OA\Property(
+ *         property="city",
+ *         ref="#/components/schemas/CityResource"
+ *     ),
+ *     @OA\Property(
+ *         property="created_at",
+ *         type="string",
+ *         description="User created at"
+ *     )
+ * )
+ */
 class UserResource extends JsonResource
 {
     /**
