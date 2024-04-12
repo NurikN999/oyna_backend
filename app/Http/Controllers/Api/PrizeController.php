@@ -41,7 +41,7 @@ class PrizeController extends Controller
      */
     public function index()
     {
-        $prizes = Prize::paginate(4);
+        $prizes = Prize::paginate(10);
         return PrizeResource::collection($prizes);
     }
 

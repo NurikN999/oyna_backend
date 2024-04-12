@@ -39,7 +39,7 @@ class AdvertisingController extends Controller
      */
     public function index()
     {
-        return AdvertisingResource::collection(Advertising::paginate(4));
+        return AdvertisingResource::collection(Advertising::paginate(10));
     }
 
     /**

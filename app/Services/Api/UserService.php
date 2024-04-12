@@ -10,7 +10,7 @@ class UserService
 {
     public function all()
     {
-        return User::all();
+        return User::paginate(10);
     }
 
     public function create(array $data): mixed

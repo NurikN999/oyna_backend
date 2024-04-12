@@ -31,7 +31,7 @@ class OfferController extends Controller
      */
     public function index()
     {
-        return OfferResource::collection(Offer::paginate(4));
+        return OfferResource::collection(Offer::paginate(10));
     }
 
     /**

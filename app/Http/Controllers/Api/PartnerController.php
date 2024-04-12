@@ -42,7 +42,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        return PartnersResource::collection(Partner::paginate(4));
+        return PartnersResource::collection(Partner::paginate(10));
     }
 
     /**

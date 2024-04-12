@@ -95,7 +95,7 @@ class EntertainmentController extends Controller
      */
     public function index()
     {
-        $entertainments = Entertainment::paginate(4);
+        $entertainments = Entertainment::paginate(10);
 
         return EntertainmentResource::collection($entertainments);
     }

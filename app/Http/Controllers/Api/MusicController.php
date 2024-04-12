@@ -109,7 +109,7 @@ class MusicController extends Controller
     */
     public function index()
     {
-        $musics = Music::paginate(4);
+        $musics = Music::paginate(10);
 
         return MusicResource::collection($musics);
     }

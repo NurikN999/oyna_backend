@@ -43,7 +43,7 @@ class HospitalityVenueController extends Controller
     */
     public function index()
     {
-        $hospitalityVenues = HospitalityVenue::paginate(4);
+        $hospitalityVenues = HospitalityVenue::paginate(10);
 
         return HospitalityVenueResource::collection($hospitalityVenues);
     }
