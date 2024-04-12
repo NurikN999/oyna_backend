@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\EntertainmentType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EntertainmentRequest\EntertainmentStoreRequest;
 use App\Http\Requests\EntertainmentRequest\EntertainmentUpdateRequest;
@@ -249,6 +250,31 @@ class EntertainmentController extends Controller
 
         return response()->json([
             'message' => 'Entertainment deleted successfully'
+        ]);
+    }
+
+    /**
+     * Get all entertainment types.
+     * @return \Illuminate\Http\JsonResponse
+     * @OA\Get(
+     *  path="/api/entertainments/types",
+     *  tags={"Entertainments"},
+     *  summary="Get all entertainment types",
+     *  description="Get all entertainment types",
+     *  operationId="types",
+     *  @OA\Response(
+     *      response=200,
+     *      description="Entertainment types retrieved successfully",
+     *      @OA\JsonContent(
+     *          @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/EntertainmentType")),
+     *      )
+     *  )
+     * )
+     */
+    public function types()
+    {
+        return response()->json([
+            'data' => EntertainmentType::all()
         ]);
     }
 

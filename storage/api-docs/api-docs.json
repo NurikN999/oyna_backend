@@ -750,6 +750,36 @@
                 }
             }
         },
+        "/api/entertainments/types": {
+            "get": {
+                "tags": [
+                    "Entertainments"
+                ],
+                "summary": "Get all entertainment types",
+                "description": "Get all entertainment types",
+                "operationId": "types",
+                "responses": {
+                    "200": {
+                        "description": "Entertainment types retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/EntertainmentType"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/games": {
             "get": {
                 "tags": [
@@ -2094,6 +2124,18 @@
     },
     "components": {
         "schemas": {
+            "EntertainmentType": {
+                "description": "The genre of the music",
+                "type": "string",
+                "enum": [
+                    "game_center",
+                    "cinema",
+                    "theater",
+                    "museum",
+                    "park",
+                    "anticafe"
+                ]
+            },
             "MusicGenreType": {
                 "description": "The genre of the music",
                 "type": "string",

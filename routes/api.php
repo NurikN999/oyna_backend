@@ -92,6 +92,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('/', [EntertainmentController::class, 'store']);
         Route::patch('/{entertainment}', [EntertainmentController::class, 'update']);
         Route::delete('/{entertainment}', [EntertainmentController::class, 'destroy']);
+        Route::get('/types', [EntertainmentController::class, 'types']);
     });
 
     Route::prefix('musics')->group(function () {
