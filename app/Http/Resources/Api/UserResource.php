@@ -81,6 +81,7 @@ class UserResource extends JsonResource
             'teams' => $this->teams,
             'is_active' => $this->is_active,
             'city' => new CityResource($this->city),
+            'image' => new ImageResource($this->image),
             'created_at' => $this->created_at
         ];
     }

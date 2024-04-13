@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest\UpdateUserRequest;
 use App\Http\Resources\Api\UserResource;
 use App\Models\User;
+use App\Services\Api\ImageService;
 use App\Services\Api\UserService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     private UserService $userService;
+    private ImageService $imageService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, ImageService $imageService)
     {
         $this->userService = $userService;
+        $this->imageService = $imageService;
     }
 
     /**
@@ -128,7 +131,12 @@ class UserController extends Controller
      */
     public function update(User $user, UpdateUserRequest $request)
     {
-        $user = $this->userService->update($user, $request->validated());
+        $data = $request->validated();
+        $user = $this->userService->update($user, $data);
+
+        if ($data['image']) {
+            $this->imageService->upload($data['image'], User::class, $user->id);
+        }
 
         return response()->json([
             'data' => new UserResource($user)

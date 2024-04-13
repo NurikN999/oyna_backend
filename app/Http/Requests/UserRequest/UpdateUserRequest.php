@@ -83,6 +83,7 @@ class UpdateUserRequest extends FormRequest
             'teams' => 'string|max:255',
             'city_id' => 'numeric',
             'password' => 'string|min:8|confirmed',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

@@ -65,4 +65,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(City::class);
     }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }
