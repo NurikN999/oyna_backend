@@ -51,10 +51,10 @@ use Illuminate\Foundation\Http\FormRequest;
  *         description="User password"
  *     ),
  *     @OA\Property(
- *         property="password_confirmation",
- *         type="string",
- *         description="User password confirmation"
- *     ),
+ *         property="image",
+ *         type="binary",
+ *         description="User image"
+ *     )
  * )
  */
 class UpdateUserRequest extends FormRequest

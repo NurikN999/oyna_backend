@@ -56,6 +56,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         ref="#/components/schemas/CityResource"
  *     ),
  *     @OA\Property(
+ *         property="image",
+ *         ref="#/components/schemas/ImageResource"
+ *     ),
+ *     @OA\Property(
  *         property="created_at",
  *         type="string",
  *         description="User created at"
