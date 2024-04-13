@@ -60,7 +60,7 @@ class EntertainmentResource extends JsonResource
             'title' => $this->title,
             'address' => $this->address,
             'description' => $this->description,
-            'city_id' => $this->city_id,
+            'city' => new CityResource($this->city),
             'image' => new ImageResource($this->image),
         ];
     }
