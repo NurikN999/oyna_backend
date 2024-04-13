@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AdvertisingController;
 use App\Http\Controllers\Api\HospitalityVenueController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\DifferenceController;
 use App\Http\Controllers\Api\EntertainmentController;
@@ -48,6 +49,10 @@ Route::prefix('hospitality-venues')->group(function () {
     Route::get('/types', [HospitalityVenueController::class, 'types']);
     Route::get('/', [HospitalityVenueController::class, 'index']);
     Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
+});
+Route::prefix('banners')->group(function () {
+    Route::get('/', [BannerController::class, 'index']);
+    Route::get('/{banner}', [BannerController::class, 'show']);
 });
 Route::prefix('partners')->group(function () {
     Route::get('/', [PartnerController::class, 'index']);
@@ -141,6 +146,12 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('/', [DifferenceController::class, 'store']);
         Route::patch('/{difference}', [DifferenceController::class, 'update']);
         Route::delete('/{difference}', [DifferenceController::class, 'destroy']);
+    });
+
+    Route::prefix('banneres')->group(function () {
+        Route::post('/', [BannerController::class, 'store']);
+        Route::patch('/{banner}', [BannerController::class, 'update']);
+        Route::delete('/{banner}', [BannerController::class, 'destroy']);
     });
 
 });

@@ -206,6 +206,243 @@
                 }
             }
         },
+        "/banners": {
+            "get": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Get a list of banners",
+                "operationId": "aec31e661d8989001e3a0c5e3282c75d",
+                "responses": {
+                    "200": {
+                        "description": "A paginated array of banners",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/BannerResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Create a new banner",
+                "operationId": "7d12fa34d64eee6536beb39d781529d5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreBannerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Banner created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/banners/{banner}": {
+            "get": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Get a banner",
+                "operationId": "cb5cdda796e4e4af504120f69245118f",
+                "parameters": [
+                    {
+                        "name": "banner",
+                        "in": "path",
+                        "description": "The ID of the banner",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The banner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Banner not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Delete a banner",
+                "operationId": "2d4ced29c27c6970ea4e8654c7f79f6b",
+                "parameters": [
+                    {
+                        "name": "banner",
+                        "in": "path",
+                        "description": "The ID of the banner",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Banner deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Banner not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Update a banner",
+                "operationId": "5ca7f973b59006928242d7a84f5dbe97",
+                "parameters": [
+                    {
+                        "name": "banner",
+                        "in": "path",
+                        "description": "The ID of the banner",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateBannerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Banner updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Banner not found"
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/cities": {
             "get": {
                 "tags": [
@@ -2395,6 +2632,51 @@
                     "video_link"
                 ]
             },
+            "StoreBannerRequest": {
+                "required": [
+                    "title",
+                    "description",
+                    "image"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "The title of the banner",
+                        "type": "string",
+                        "example": "Sample Banner"
+                    },
+                    "description": {
+                        "description": "The description of the banner",
+                        "type": "string",
+                        "example": "This is a sample banner"
+                    },
+                    "image": {
+                        "description": "The image of the banner",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateBannerRequest": {
+                "properties": {
+                    "title": {
+                        "description": "The title of the banner",
+                        "type": "string",
+                        "example": "Updated Banner"
+                    },
+                    "description": {
+                        "description": "The description of the banner",
+                        "type": "string",
+                        "example": "This is an updated banner"
+                    },
+                    "image": {
+                        "description": "The updated image of the banner",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
             "StoreDifferenceRequest": {
                 "required": [
                     "game_level",
@@ -2778,9 +3060,9 @@
                         "description": "User password",
                         "type": "string"
                     },
-                    "password_confirmation": {
-                        "description": "User password confirmation",
-                        "type": "string"
+                    "image": {
+                        "description": "User image",
+                        "type": "binary"
                     }
                 },
                 "type": "object"
@@ -2811,6 +3093,29 @@
                     "video_path": {
                         "type": "string",
                         "example": "http://oynapp.kz/storage/videos/1.mp4"
+                    }
+                },
+                "type": "object"
+            },
+            "BannerResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the banner",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "The title of the banner",
+                        "type": "string",
+                        "example": "Sample Banner"
+                    },
+                    "description": {
+                        "description": "The description of the banner",
+                        "type": "string",
+                        "example": "This is a sample banner"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageResource"
                     }
                 },
                 "type": "object"
@@ -3215,6 +3520,9 @@
                     },
                     "city": {
                         "$ref": "#/components/schemas/CityResource"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageResource"
                     },
                     "created_at": {
                         "description": "User created at",
