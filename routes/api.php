@@ -49,6 +49,7 @@ Route::prefix('hospitality-venues')->group(function () {
     Route::get('/types', [HospitalityVenueController::class, 'types']);
     Route::get('/', [HospitalityVenueController::class, 'index']);
     Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
+    Route::get('/{hospitalityVenue}/qr-code', [HospitalityVenueController::class, 'showQrCode']);
 });
 Route::prefix('banners')->group(function () {
     Route::get('/', [BannerController::class, 'index']);

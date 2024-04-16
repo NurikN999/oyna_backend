@@ -9,7 +9,10 @@ use App\Http\Requests\HospitalityVenueRequest\UpdateHospitalityVenue;
 use App\Http\Resources\Api\HospitalityVenueResource;
 use App\Models\HospitalityVenue;
 use App\Services\Api\ImageService;
-use Illuminate\Http\Request;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
 
 class HospitalityVenueController extends Controller
 {
@@ -284,6 +287,60 @@ class HospitalityVenueController extends Controller
         return response()->json([
             'data' => HospitalityVenueType::all()
         ], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/hospitality-venues/{hospitalityVenueId}/qr-code",
+     *     summary="Get a QR code for a specific hospitality venue",
+     *     description="Generate a QR code based on the address of the specified hospitality venue. The QR code is returned as a data URI in a JSON response.",
+     *     operationId="showQrCode",
+     *     tags={"Hospitality Venues"},
+     *     @OA\Parameter(
+     *         name="hospitalityVenueId",
+     *         in="path",
+     *         description="The ID of the hospitality venue for which to generate the QR code",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="qr_code",
+     *                     type="string",
+     *                     description="The QR code as a data URI"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Hospitality venue not found"
+     *     )
+     * )
+     */
+    public function showQrCode(HospitalityVenue $hospitalityVenue)
+    {
+        $qrCode = QrCode::create($hospitalityVenue->address)
+            ->setSize(300)
+            ->setErrorCorrectionLevel(ErrorCorrectionLevel::High)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin);
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+
+        $qrCodeUri = $result->getDataUri();
+
+        return response()->json([
+            'qr_code' => $qrCodeUri
+        ]);
     }
 
 }

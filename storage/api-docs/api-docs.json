@@ -1342,6 +1342,48 @@
                 ]
             }
         },
+        "/api/hospitality-venues/{hospitalityVenueId}/qr-code": {
+            "get": {
+                "tags": [
+                    "Hospitality Venues"
+                ],
+                "summary": "Get a QR code for a specific hospitality venue",
+                "description": "Generate a QR code based on the address of the specified hospitality venue. The QR code is returned as a data URI in a JSON response.",
+                "operationId": "showQrCode",
+                "parameters": [
+                    {
+                        "name": "hospitalityVenueId",
+                        "in": "path",
+                        "description": "The ID of the hospitality venue for which to generate the QR code",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "qr_code": {
+                                            "description": "The QR code as a data URI",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hospitality venue not found"
+                    }
+                }
+            }
+        },
         "/api/musics": {
             "get": {
                 "tags": [
