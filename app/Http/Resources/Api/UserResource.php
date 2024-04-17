@@ -64,6 +64,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         type="string",
  *         description="User created at"
  *     )
+ *     @OA\Property(
+ *         property="points",
+ *         type="integer",
+ *         description="User points"
+ *     )
  * )
  */
 class UserResource extends JsonResource
