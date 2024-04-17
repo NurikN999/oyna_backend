@@ -74,6 +74,7 @@ Route::prefix('advertisings')->group(function () {
 Route::prefix('games')->group(function () {
     Route::get('/', [GameController::class, 'index']);
     Route::get('/{game}', [GameController::class, 'show']);
+    Route::post('/{game}/finish', [GameController::class, 'finishGame']);
 });
 
 Route::prefix('quiz-questions')->group(function () {

@@ -70,4 +70,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function points()
+    {
+        return $this->hasOne(Point::class);
+    }
+
+    public function pointsHistory()
+    {
+        return $this->hasMany(PointsHistory::class);
+    }
 }

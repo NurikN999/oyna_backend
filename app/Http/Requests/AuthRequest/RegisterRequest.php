@@ -30,6 +30,8 @@ class RegisterRequest extends FormRequest
             'password_confirmation' => 'required|same:password',
             'interests' => 'nullable|string',
             'teams' => 'nullable|string',
+            'city_id' => 'required|integer|exists:cities,id',
+            'unique_id' => 'nullable|string',
         ];
     }
 }

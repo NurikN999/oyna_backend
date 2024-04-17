@@ -1075,6 +1075,60 @@
                 }
             }
         },
+        "/api/games/{id}/finish": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Finish a game and generate a QR code",
+                "description": "Finish a game, cache the points, generate a unique ID and a QR code based on this ID, and return the QR code as a data URI in a JSON response.",
+                "operationId": "finishGame",
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "points": {
+                                        "description": "The points earned in the game",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "points": 123
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "A message instructing the user to register to receive the results",
+                                            "type": "string"
+                                        },
+                                        "qr_code": {
+                                            "description": "The QR code as a data URI",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
         "/api/hospitality-venues": {
             "get": {
                 "tags": [
