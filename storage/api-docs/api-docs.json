@@ -206,6 +206,197 @@
                 }
             }
         },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user, send a verification code via SMS, and return a message.",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Input data format",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Мы отправили SMS с кодом подтверждения на ваш номер телефона 1234567890"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred"
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login an existing user",
+                "description": "Login an existing user, send a verification code via SMS, and return a message.",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Input data format",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Мы отправили SMS с кодом подтверждения на ваш номер телефона 1234567890"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout the authenticated user",
+                "description": "Logout the authenticated user and return a message.",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User logged out successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/verify": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Verify a user's phone number",
+                "description": "Verify a user's phone number using a code, log in or register the user, and return a token and user data.",
+                "operationId": "verify",
+                "requestBody": {
+                    "description": "Input data format",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "phone_number": {
+                                        "description": "The phone number of the user",
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "description": "The verification code",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "phone_number": "1234567890",
+                                "code": "12345"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User logged in successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "token": {
+                                                    "description": "The JWT token",
+                                                    "type": "string"
+                                                },
+                                                "user": {
+                                                    "$ref": "#/components/schemas/UserResource"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid verification code"
+                    },
+                    "404": {
+                        "description": "Verification code not found"
+                    }
+                }
+            }
+        },
         "/banners": {
             "get": {
                 "tags": [
@@ -2727,6 +2918,87 @@
                     "video",
                     "video_link"
                 ]
+            },
+            "LoginRequest": {
+                "required": [
+                    "phone_number",
+                    "unique_id"
+                ],
+                "properties": {
+                    "phone_number": {
+                        "description": "The phone_number address of the user",
+                        "type": "string",
+                        "format": "phone_number"
+                    },
+                    "unique_id": {
+                        "description": "The unique_id of the user",
+                        "type": "string",
+                        "format": "unique_id"
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "phone_number": "+777777777",
+                    "unique_id": "string"
+                }
+            },
+            "RegisterRequest": {
+                "required": [
+                    "first_name",
+                    "age",
+                    "phone_number"
+                ],
+                "properties": {
+                    "first_name": {
+                        "description": "The first name of the user",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "description": "The last name of the user",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "The email address of the user",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "age": {
+                        "description": "The age of the user",
+                        "type": "integer"
+                    },
+                    "phone_number": {
+                        "description": "The phone number of the user",
+                        "type": "string"
+                    },
+                    "interests": {
+                        "description": "The interests of the user",
+                        "type": "string"
+                    },
+                    "teams": {
+                        "description": "The teams of the user",
+                        "type": "string"
+                    },
+                    "city_id": {
+                        "description": "The ID of the city of the user",
+                        "type": "integer"
+                    },
+                    "unique_id": {
+                        "description": "The unique ID of the user",
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "email": "john@example.com",
+                    "age": 30,
+                    "phone_number": "1234567890",
+                    "interests": "coding,reading",
+                    "teams": "team1,team2",
+                    "city_id": 1,
+                    "unique_id": "abc123"
+                }
             },
             "StoreBannerRequest": {
                 "required": [

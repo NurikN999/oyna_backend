@@ -3,7 +3,25 @@
 namespace App\Http\Requests\AuthRequest;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="LoginRequest",
+ *     required={"phone_number", "unique_id"},
+ *     @OA\Property(
+ *         property="phone_number",
+ *         type="string",
+ *         format="phone_number",
+ *         description="The phone_number address of the user"
+ *     ),
+ *     @OA\Property(
+ *         property="unique_id",
+ *         type="string",
+ *         format="unique_id",
+ *         description="The unique_id of the user"
+ *     ),
+ *     example={"phone_number": "+777777777", "unique_id": "string"}
+ * )
+ */
 class LoginRequest extends FormRequest
 {
     /**
@@ -22,8 +40,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'phone_number' => 'required|string',
             'unique_id' => 'nullable|string',
         ];
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->unsignedBigInteger('age');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('phone_number')->nullable();
             $table->string('interests')->nullable();
             $table->string('teams')->nullable();
             $table->boolean('is_active');

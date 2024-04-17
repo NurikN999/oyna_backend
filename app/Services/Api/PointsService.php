@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class PointsService
 {
-    const CACHE_TTL = 60 * 24;
+    public const CACHE_TTL = 60 * 24;
 
     public function cachePendingPoints($points)
     {
@@ -30,7 +30,7 @@ class PointsService
             return ['error' => 'Баллы не найдены или время их действия истекло.'];
         }
 
-        DB::transaction(function() use($userId, $points) {
+        DB::transaction(function () use ($userId, $points) {
             $user = User::find($userId);
             $pointsRecord = $user->points->firstOrCreate([]);
             $pointsRecord->balance += $points;
