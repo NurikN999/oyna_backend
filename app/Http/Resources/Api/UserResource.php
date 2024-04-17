@@ -63,7 +63,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         property="created_at",
  *         type="string",
  *         description="User created at"
- *     )
+ *     ),
  *     @OA\Property(
  *         property="points",
  *         type="integer",

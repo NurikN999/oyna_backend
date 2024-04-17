@@ -3895,6 +3895,10 @@
                     "created_at": {
                         "description": "User created at",
                         "type": "string"
+                    },
+                    "points": {
+                        "description": "User points",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
