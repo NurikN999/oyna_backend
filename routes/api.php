@@ -99,61 +99,61 @@ Route::middleware('jwt.auth')->group(function () {
         Route::delete('/{user}', [UserController::class, 'destroy']);
     });
 
-    Route::prefix('entertainments')->group(function () {
+    Route::prefix('entertainments')->middleware('admin')->group(function () {
         Route::post('/', [EntertainmentController::class, 'store']);
         Route::patch('/{entertainment}', [EntertainmentController::class, 'update']);
         Route::delete('/{entertainment}', [EntertainmentController::class, 'destroy']);
     });
 
-    Route::prefix('musics')->group(function () {
+    Route::prefix('musics')->middleware('admin')->group(function () {
         Route::post('/', [MusicController::class, 'store']);
         Route::patch('/{music}', [MusicController::class, 'update']);
         Route::delete('/{music}', [MusicController::class, 'destroy']);
     });
 
-    Route::prefix('hospitality-venues')->group(function () {
+    Route::prefix('hospitality-venues')->middleware('admin')->group(function () {
         Route::post('/', [HospitalityVenueController::class, 'store']);
         Route::patch('/{hospitalityVenue}', [HospitalityVenueController::class, 'update']);
         Route::delete('/{hospitalityVenue}', [HospitalityVenueController::class, 'delete']);
     });
 
-    Route::prefix('partners')->group(function () {
+    Route::prefix('partners')->middleware('admin')->group(function () {
         Route::post('/', [PartnerController::class, 'store']);
         Route::patch('/{partner}', [PartnerController::class, 'update']);
         Route::delete('/{partner}', [PartnerController::class, 'delete']);
     });
 
-    Route::prefix('offers')->group(function () {
+    Route::prefix('offers')->middleware('admin')->group(function () {
         Route::post('/', [OfferController::class, 'store']);
         Route::patch('/{offer}', [OfferController::class, 'update']);
         Route::delete('/{offer}', [OfferController::class, 'destroy']);
     });
 
-    Route::prefix('prizes')->group(function () {
+    Route::prefix('prizes')->middleware('admin')->group(function () {
         Route::post('/', [PrizeController::class, 'store']);
         Route::patch('/{prize}', [PrizeController::class, 'update']);
         Route::delete('/{prize}', [PrizeController::class, 'destroy']);
     });
 
-    Route::prefix('advertisings')->group(function () {
+    Route::prefix('advertisings')->middleware('admin')->group(function () {
         Route::post('/', [AdvertisingController::class, 'store']);
         Route::patch('/{advertising}', [AdvertisingController::class, 'update']);
         Route::delete('/{advertising}', [AdvertisingController::class, 'destroy']);
     });
 
-    Route::prefix('quiz-questions')->group(function () {
+    Route::prefix('quiz-questions')->middleware('admin')->group(function () {
         Route::post('/', [QuizQuestionController::class, 'store']);
         Route::patch('/{quizQuestion}', [QuizQuestionController::class, 'update']);
         Route::delete('/{quizQuestion}', [QuizQuestionController::class, 'destroy']);
     });
 
-    Route::prefix('differences')->group(function () {
+    Route::prefix('differences')->middleware('admin')->group(function () {
         Route::post('/', [DifferenceController::class, 'store']);
         Route::patch('/{difference}', [DifferenceController::class, 'update']);
         Route::delete('/{difference}', [DifferenceController::class, 'destroy']);
     });
 
-    Route::prefix('banneres')->group(function () {
+    Route::prefix('banneres')->middleware('admin')->group(function () {
         Route::post('/', [BannerController::class, 'store']);
         Route::patch('/{banner}', [BannerController::class, 'update']);
         Route::delete('/{banner}', [BannerController::class, 'destroy']);

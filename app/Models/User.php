@@ -30,6 +30,7 @@ class User extends Authenticatable implements JWTSubject
         'teams',
         'is_active',
         'city_id',
+        'is_admin',
     ];
 
     /**
