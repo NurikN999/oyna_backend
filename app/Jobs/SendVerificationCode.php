@@ -33,14 +33,14 @@ class SendVerificationCode implements ShouldQueue
     public function handle(): void
     {
         $api = new MobizonApi([
-            'api_key' => env('MOBIZON_API_KEY'),
+            'apiKey' => env('MOBIZON_API_KEY'),
             'apiServer' => env('MOBIZON_API_SERVER', 'api.mobizon.kz'),
         ]);
 
         $api->call('message', 'sendSMSMessage', [
             'recipient' => $this->phone_number,
-            'text' => 'OynaKz Ваш код верификации: ' . $this->code,
-            'from' => 'OynaKz'
+            'text' => 'Oynapp Ваш код верификации: ' . $this->code,
+            // 'from' => 'OynaKz'
         ]);
     }
 }

@@ -67,7 +67,8 @@ class AuthController extends Controller
 
             Cache::put($user->phone_number, [
                 'code' => $code,
-                'unique_id' => $request->unique_id
+                'unique_id' => $request->unique_id,
+                'user' => $user
             ], now()->addMinutes(20));
 
             return response()->json(
@@ -132,7 +133,6 @@ class AuthController extends Controller
         Cache::put($user->phone_number, [
             'code' => $code,
             'unique_id' => $request->unique_id,
-            'user' => $user
         ], now()->addMinutes(20));
 
         return response()->json(
@@ -256,6 +256,7 @@ class AuthController extends Controller
             $message = 'User logged in successfully';
         } else {
             $user = $data['user'];
+            $user->is_active = true;
             $user->save();
 
             $token = JWTAuth::fromUser($user);
@@ -275,7 +276,7 @@ class AuthController extends Controller
                         'user' => new UserResource($user)
                     ]
                 ],
-                $pointsResult
+                $pointsResult ?? [],
             ),
             200
         );
