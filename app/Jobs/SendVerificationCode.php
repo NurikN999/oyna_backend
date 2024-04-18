@@ -40,7 +40,7 @@ class SendVerificationCode implements ShouldQueue
         $api->call('message', 'sendSMSMessage', [
             'recipient' => $this->phone_number,
             'text' => 'Oynapp Ваш код верификации: ' . $this->code,
-            // 'from' => 'OynaKz'
+            'from' => 'Oynapp'
         ]);
     }
 }
