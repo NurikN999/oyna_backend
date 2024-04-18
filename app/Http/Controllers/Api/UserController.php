@@ -27,23 +27,42 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @OA\Get(
      *    path="/api/users",
-     *   tags={"Users"},
-     *  summary="Get all users",
-     * description="Get all users",
-     * operationId="getAllUsers",
-     * @OA\Response(
-     *   response=200,
-     * description="Users retrieved successfully",
-     * @OA\JsonContent(
-     *  @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/UserResource")),
-     * )
-     * )
+     *    tags={"Users"},
+     *    summary="Get all users",
+     *    description="Get all users. You can filter users who have prizes by adding the 'has_prizes' query parameter. Set it to 'true' to get users who have prizes, and 'false' to get users who don't have prizes.",
+     *    operationId="getAllUsers",
+     *    @OA\Parameter(
+     *        name="has_prizes",
+     *        in="query",
+     *        description="Whether the user has prizes or not",
+     *        required=false,
+     *        @OA\Schema(
+     *            type="boolean"
+     *        )
+     *    ),
+     *     @OA\Parameter(
+     *        name="is_taxi_driver",
+     *        in="query",
+     *        description="Whether the user taxi driver or not",
+     *        required=false,
+     *        @OA\Schema(
+     *            type="boolean"
+     *        )
+     *    ),
+     *    @OA\Response(
+     *        response=200,
+     *        description="Users retrieved successfully",
+     *        @OA\JsonContent(
+     *            @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/UserResource")),
+     *        )
+     *    )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
+        $queryFilter = $request->all();
         return response()->json([
-            'data' => UserResource::collection($this->userService->all())
+            'data' => UserResource::collection($this->userService->all($queryFilter))
         ], Response::HTTP_OK);
     }
 

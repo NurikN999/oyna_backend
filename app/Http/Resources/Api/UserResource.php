@@ -92,6 +92,8 @@ class UserResource extends JsonResource
             'points' => $this->points ? $this->points->balance : 0,
             'city' => new CityResource($this->city),
             'image' => new ImageResource($this->image),
+            'prizes' => PrizeResource::collection($this->prizes) ?? [],
+            'is_taxi_driver' => $this->is_taxi_driver,
             'created_at' => $this->created_at
         ];
     }

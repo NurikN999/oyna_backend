@@ -54,6 +54,11 @@ use Illuminate\Foundation\Http\FormRequest;
  *         type="string",
  *         description="The unique ID of the user"
  *     ),
+ *     @OA\Property(
+ *         property="is_taxi_driver",
+ *         type="boolean",
+ *         description="Field if user taxi driver or not"
+ *     ),
  *     example={
  *         "first_name": "John",
  *         "last_name": "Doe",
@@ -94,6 +99,7 @@ class RegisterRequest extends FormRequest
             'teams' => 'nullable|string',
             'city_id' => 'nullable|integer|exists:cities,id',
             'unique_id' => 'nullable|string',
+            'is_taxi_driver' => 'nullable|boolean',
         ];
     }
 }

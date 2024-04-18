@@ -31,6 +31,7 @@ class User extends Authenticatable implements JWTSubject
         'is_active',
         'city_id',
         'is_admin',
+        'is_taxi_driver',
     ];
 
     /**
@@ -81,5 +82,10 @@ class User extends Authenticatable implements JWTSubject
     public function pointsHistory()
     {
         return $this->hasMany(PointsHistory::class);
+    }
+
+    public function prizes()
+    {
+        return $this->belongsToMany(Prize::class, 'user_prizes');
     }
 }

@@ -2651,8 +2651,28 @@
                     "Users"
                 ],
                 "summary": "Get all users",
-                "description": "Get all users",
+                "description": "Get all users. You can filter users who have prizes by adding the 'has_prizes' query parameter. Set it to 'true' to get users who have prizes, and 'false' to get users who don't have prizes.",
                 "operationId": "getAllUsers",
+                "parameters": [
+                    {
+                        "name": "has_prizes",
+                        "in": "query",
+                        "description": "Whether the user has prizes or not",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "is_taxi_driver",
+                        "in": "query",
+                        "description": "Whether the user taxi driver or not",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Users retrieved successfully",
@@ -2985,6 +3005,10 @@
                     "unique_id": {
                         "description": "The unique ID of the user",
                         "type": "string"
+                    },
+                    "is_taxi_driver": {
+                        "description": "Field if user taxi driver or not",
+                        "type": "boolean"
                     }
                 },
                 "type": "object",
