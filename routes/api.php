@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdvertisingController;
+use App\Http\Controllers\Api\AnalyticsController;
 use App\Http\Controllers\Api\HospitalityVenueController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BannerController;
@@ -157,6 +158,10 @@ Route::middleware('jwt.auth')->group(function () {
         Route::post('/', [BannerController::class, 'store']);
         Route::patch('/{banner}', [BannerController::class, 'update']);
         Route::delete('/{banner}', [BannerController::class, 'destroy']);
+    });
+
+    Route::prefix('analytics')->middleware('admin')->group(function () {
+        Route::get('/', [AnalyticsController::class, 'index']);
     });
 
 });

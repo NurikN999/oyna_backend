@@ -206,6 +206,68 @@
                 }
             }
         },
+        "/api/analytics": {
+            "get": {
+                "tags": [
+                    "Analytics"
+                ],
+                "summary": "Get analytics data",
+                "description": "Get analytics data. You can filter the data by category by adding the 'category' query parameter. You can also filter the data by date by adding the 'date_from_gte' and 'date_to_lte' query parameters.",
+                "operationId": "getAnalytics",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "The category to filter the analytics data by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_from_gte",
+                        "in": "query",
+                        "description": "The start date to filter the analytics data by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "date_to_lte",
+                        "in": "query",
+                        "description": "The end date to filter the analytics data by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Analytics data retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "description": "The analytics data",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
         "/api/auth/register": {
             "post": {
                 "tags": [
