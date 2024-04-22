@@ -56,6 +56,18 @@ return [
             'throw' => false,
         ],
 
+        'ps' => [
+            'driver' => 's3',
+            'key' => env('PS_ACCESS_KEY_ID'),
+            'secret' => env('PS_SECRET_ACCESS_KEY'),
+            'region' => env('PS_DEFAULT_REGION'),
+            'bucket' => env('PS_BUCKET'),
+            'url' => env('PS_URL'),
+            'endpoint' => env('PS_ENDPOINT'),
+            'use_path_style_endpoint' => env('PS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+        ],
+
     ],
 
     /*

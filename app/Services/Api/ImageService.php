@@ -5,15 +5,27 @@ declare(strict_types=1);
 namespace App\Services\Api;
 
 use App\Models\Image;
+use App\Services\S3\S3Service;
 use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
+    private $s3Service;
+
+    public function __construct(S3Service $s3Service)
+    {
+        $this->s3Service = $s3Service;
+    }
+
     public function upload($file, string $imageableType, int $imageableId)
     {
-        $path = $file->store('images', 'public');
+        $fileName = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+        $path = 'images/' . $fileName;
+
+        $link = $this->s3Service->uploadFileToS3($file, $path);
+
         $image = Image::create([
-            'path' => 'http://oynapp.kz/storage/' . $path,
+            'path' => $link,
             'imageable_type' => $imageableType,
             'imageable_id' => $imageableId
         ]);

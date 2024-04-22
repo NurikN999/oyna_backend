@@ -50,7 +50,7 @@ class MusicResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'genre' => $this->genre,
-            'path' => Storage::url($this->path),
+            'path' => $this->path,
             'image' => $this->image,
         ];
     }
