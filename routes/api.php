@@ -154,7 +154,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::delete('/{difference}', [DifferenceController::class, 'destroy']);
     });
 
-    Route::prefix('banneres')->middleware('admin')->group(function () {
+    Route::prefix('banners')->middleware('admin')->group(function () {
         Route::post('/', [BannerController::class, 'store']);
         Route::patch('/{banner}', [BannerController::class, 'update']);
         Route::delete('/{banner}', [BannerController::class, 'destroy']);
