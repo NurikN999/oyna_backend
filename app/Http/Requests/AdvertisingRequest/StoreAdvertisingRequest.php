@@ -37,7 +37,7 @@ class StoreAdvertisingRequest extends FormRequest
         return [
             'title' => 'required|string',
             'placement_area' => 'required|string',
-            'play_time' => 'required|date',
+            'play_time' => 'required|string',
             'description' => 'required|string',
             'video' => 'required|file|mimes:mp4,mov,avi,wmv',
             'video_link' => ['required_if:video,null', 'url'],
