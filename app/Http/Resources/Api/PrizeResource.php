@@ -49,6 +49,7 @@ class PrizeResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'point_amount' => $this->point_amount,
             'image' => new ImageResource($this->image)
         ];
     }
