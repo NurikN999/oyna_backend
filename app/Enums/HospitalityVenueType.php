@@ -26,7 +26,7 @@ enum HospitalityVenueType: string
     {
         return [
             self::RESTAURANT->value => 'Ресторан',
-            self::HOTEL->value => 'Отель',
+            self::HOTEL->value => 'Гостиница',
         ];
     }
 }
