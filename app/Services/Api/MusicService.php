@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Api;
 
+use App\Models\Music;
 use App\Services\S3\S3Service;
 use Illuminate\Support\Facades\Storage;
 

@@ -1697,8 +1697,19 @@
                     "Music"
                 ],
                 "summary": "Get all music",
-                "description": "Get all music",
+                "description": "Get all music. You can filter the music by genre by adding the 'genre' query parameter.",
                 "operationId": "getMusic",
+                "parameters": [
+                    {
+                        "name": "genre",
+                        "in": "query",
+                        "description": "The genre to filter the music by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -2945,11 +2956,11 @@
                 "type": "string",
                 "enum": [
                     "pop",
-                    "rock",
+                    "kazakh",
                     "jazz",
                     "classic",
-                    "hip_hop",
-                    "electronic"
+                    "country",
+                    "funny"
                 ]
             },
             "StoreAdvertisingRequest": {

@@ -87,31 +87,45 @@ class MusicController extends Controller
     }
 
     /**
-    * @OA\Get(
-    *     path="/api/musics",
-    *     summary="Get all music",
-    *     description="Get all music",
-    *     operationId="getMusic",
-    *     tags={"Music"},
-    *     security={{"bearerAuth": {}}},
-    *     @OA\Response(
-    *         response=200,
-    *         description="Success",
-    *         @OA\JsonContent(
-    *             @OA\Property(
-    *                 property="data",
-    *                 type="array",
-    *                 @OA\Items(ref="#/components/schemas/MusicResource")
-    *             )
-    *         )
-    *     )
-    * )
-    */
-    public function index()
+     * @OA\Get(
+     *     path="/api/musics",
+     *     summary="Get all music",
+     *     description="Get all music. You can filter the music by genre by adding the 'genre' query parameter.",
+     *     operationId="getMusic",
+     *     tags={"Music"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="genre",
+     *         in="query",
+     *         description="The genre to filter the music by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/MusicResource")
+     *             )
+     *         )
+     *     )
+     * )
+     */
+    public function index(Request $request)
     {
-        $musics = Music::paginate(10);
+        $type = $request->query('genre', null);
+        $query = Music::query();
 
-        return MusicResource::collection($musics);
+        if ($type && defined('App\Enums\MusicGenreType::' . strtoupper($type))) {
+            $query->where('genre', $type);
+        }
+
+        return MusicResource::collection($query->paginate(10));
     }
 
     /**
