@@ -90,6 +90,7 @@ class UserResource extends JsonResource
             'teams' => $this->teams,
             'is_active' => $this->is_active,
             'is_admin' => $this->is_admin,
+            'phone_number' => $this->phone_number,
             'points' => $this->points ? $this->points->balance : 0,
             'city' => new CityResource($this->city),
             'image' => new ImageResource($this->image),
