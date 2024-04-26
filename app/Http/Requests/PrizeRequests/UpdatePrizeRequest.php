@@ -19,6 +19,11 @@ use Illuminate\Foundation\Http\FormRequest;
  *         description="The description of the prize"
  *     ),
  *     @OA\Property(
+ *         property="point_amount",
+ *         type="integer",
+ *         description="Point amount of the prize"
+ *     ),
+ *     @OA\Property(
  *         property="image",
  *         type="string",
  *         format="binary",
@@ -46,6 +51,7 @@ class UpdatePrizeRequest extends FormRequest
         return [
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:255',
+            'point_amount' => 'nullable|integer',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }

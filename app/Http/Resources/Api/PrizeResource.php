@@ -25,6 +25,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         description="The description of the prize"
  *     ),
  *     @OA\Property(
+ *         property="point_amount",
+ *         type="integer",
+ *         description="Point amount of the prize"
+ *     ),
+ *     @OA\Property(
  *         property="image",
  *         ref="#/components/schemas/ImageResource",
  *         description="The image of the prize"

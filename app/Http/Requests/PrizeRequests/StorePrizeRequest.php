@@ -19,6 +19,11 @@ use Illuminate\Foundation\Http\FormRequest;
  *         description="The description of the prize"
  *     ),
  *     @OA\Property(
+ *         property="point_amount",
+ *         type="integer",
+ *         description="Point amount of the prize"
+ *     ),
+ *     @OA\Property(
  *         property="image",
  *         type="string",
  *         format="binary",
@@ -46,6 +51,7 @@ class StorePrizeRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'point_amount' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }

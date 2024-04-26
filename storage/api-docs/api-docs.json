@@ -3375,6 +3375,10 @@
                         "description": "The description of the prize",
                         "type": "string"
                     },
+                    "point_amount": {
+                        "description": "Point amount of the prize",
+                        "type": "integer"
+                    },
                     "image": {
                         "description": "The image of the prize",
                         "type": "string",
@@ -3392,6 +3396,10 @@
                     "description": {
                         "description": "The description of the prize",
                         "type": "string"
+                    },
+                    "point_amount": {
+                        "description": "Point amount of the prize",
+                        "type": "integer"
                     },
                     "image": {
                         "description": "The image of the prize",
@@ -3903,6 +3911,10 @@
                     "description": {
                         "description": "The description of the prize",
                         "type": "string"
+                    },
+                    "point_amount": {
+                        "description": "Point amount of the prize",
+                        "type": "integer"
                     },
                     "image": {
                         "$ref": "#/components/schemas/ImageResource"

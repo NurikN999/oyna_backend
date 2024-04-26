@@ -11,7 +11,8 @@ class Prize extends Model
 
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'point_amount'
     ];
 
     public function image()
