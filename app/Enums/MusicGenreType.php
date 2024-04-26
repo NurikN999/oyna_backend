@@ -22,21 +22,21 @@ namespace App\Enums;
 enum MusicGenreType: string
 {
     case POP = 'pop';
-    case ROCK = 'rock';
+    case KAZAKH = 'kazakh';
     case JAZZ = 'jazz';
     case CLASSIC = 'classic';
-    case HIP_HOP = 'hip_hop';
-    case ELECTRONIC = 'electronic';
+    case COUNTRY = 'country';
+    case FUNNY = 'funny';
 
     public static function titles(): array
     {
         return [
             self::POP->value => 'Поп',
-            self::ROCK->value => 'Рок',
+            self::KAZAKH->value => 'Казахская музыка',
             self::JAZZ->value => 'Джаз',
             self::CLASSIC->value => 'Классика',
-            self::HIP_HOP->value => 'Хип-хоп',
-            self::ELECTRONIC->value => 'Электроника',
+            self::FUNNY->value => 'Веселая',
+            self::COUNTRY->value => 'Кантри',
         ];
     }
 
