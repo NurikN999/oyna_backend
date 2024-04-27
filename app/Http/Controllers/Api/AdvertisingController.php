@@ -159,7 +159,9 @@ class AdvertisingController extends Controller
         if ($request->hasFile('video')) {
             Storage::disk('public')->delete($advertising->video_path);
             $data['video_path'] = $this->videoService->upload($request->file('video'));
-        } else {
+        }
+
+        if ($request->input('video_link')) {
             $data['video_path'] = $request->input('video_link');
         }
 
