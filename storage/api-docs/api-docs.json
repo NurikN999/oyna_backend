@@ -1328,46 +1328,46 @@
                 }
             }
         },
-        "/api/games/{id}/finish": {
+        "/api/game/finish": {
             "post": {
                 "tags": [
                     "Games"
                 ],
-                "summary": "Finish a game and generate a QR code",
-                "description": "Finish a game, cache the points, generate a unique ID and a QR code based on this ID, and return the QR code as a data URI in a JSON response.",
+                "summary": "Finish a game",
+                "description": "Finish a game and cache the points. Returns a unique ID for retrieving the points later.",
                 "operationId": "finishGame",
                 "requestBody": {
                     "description": "Input data format",
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "points"
+                                ],
                                 "properties": {
                                     "points": {
                                         "description": "The points earned in the game",
                                         "type": "integer"
                                     }
                                 },
-                                "type": "object",
-                                "example": {
-                                    "points": 123
-                                }
+                                "type": "object"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Game finished successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "A message instructing the user to register to receive the results",
+                                            "description": "The response message",
                                             "type": "string"
                                         },
-                                        "qr_code": {
-                                            "description": "The QR code as a data URI",
+                                        "unique_id": {
+                                            "description": "The unique ID for retrieving the points",
                                             "type": "string"
                                         }
                                     },
@@ -1377,7 +1377,7 @@
                         }
                     },
                     "400": {
-                        "description": "Invalid input"
+                        "description": "Bad request"
                     }
                 }
             }

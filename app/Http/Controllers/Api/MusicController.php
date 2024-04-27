@@ -207,7 +207,7 @@ class MusicController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/music/{id}",
+     *     path="/api/musics/{id}",
      *     summary="Delete a specific music",
      *     description="Delete a specific music by its id",
      *     operationId="deleteMusic",
@@ -245,7 +245,7 @@ class MusicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/music/genres",
+     *     path="/api/musics/genres",
      *     summary="Get all music genres",
      *     description="Get all music genres",
      *     operationId="getMusicGenres",
