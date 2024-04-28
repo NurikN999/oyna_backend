@@ -62,6 +62,21 @@ class DifferenceController extends Controller
      *         response=201,
      *         description="Created",
      *         @OA\JsonContent(ref="#/components/schemas/DifferenceResource")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Validation Error"),
+     *             @OA\Property(
+     *                 property="errors",
+     *                 type="object",
+     *                 @OA\Property(property="game_level", type="array", @OA\Items(type="string")),
+     *                 @OA\Property(property="game_id", type="array", @OA\Items(type="string")),
+     *                 @OA\Property(property="coordinates", type="array", @OA\Items(type="string")),
+     *                 @OA\Property(property="images", type="array", @OA\Items(type="string"))
+     *             )
+     *         )
      *     )
      * )
      */
