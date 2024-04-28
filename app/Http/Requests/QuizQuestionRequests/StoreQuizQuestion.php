@@ -58,7 +58,7 @@ class StoreQuizQuestion extends FormRequest
             'image' => 'nullable|image',
             'options' => 'required|array',
             'options.*.text' => 'required|string',
-            'options.*.is_correct' => 'required|boolean',
+            'options.*.is_correct' => 'required|string',
         ];
     }
 }

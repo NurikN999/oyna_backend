@@ -36,7 +36,7 @@ class QuizService
             $createdOption = $quizQuestion->options()->create([
                 'text' => $option['text'],
                 'quiz_question_id' => $quizQuestion->id,
-                'is_correct' => $option['is_correct'],
+                'is_correct' => $option['is_correct'] === "true" ? true : false,
             ]);
         }
     }
