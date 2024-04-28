@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @OA\Schema(
  *     schema="StoreDifferenceRequest",
  *     type="object",
- *     required={"game_level", "coordinates"},
+ *     required={"game_level", "game_id", "coordinates", "images"},
  *     @OA\Property(
  *         property="game_level",
  *         type="string",
@@ -16,17 +16,30 @@ use Illuminate\Foundation\Http\FormRequest;
  *         example="1"
  *     ),
  *     @OA\Property(
+ *         property="game_id",
+ *         type="integer",
+ *         description="The ID of the game",
+ *         example=1
+ *     ),
+ *     @OA\Property(
  *         property="coordinates",
  *         type="array",
  *         @OA\Items(
  *             type="object",
- *             required={"x1", "y1", "x2", "y2"},
- *             @OA\Property(property="x1", type="integer", example=10),
- *             @OA\Property(property="y1", type="integer", example=20),
- *             @OA\Property(property="x2", type="integer", example=30),
- *             @OA\Property(property="y2", type="integer", example=40)
+ *             required={"x", "y"},
+ *             @OA\Property(property="x", type="number", format="float", example=10.5),
+ *             @OA\Property(property="y", type="number", format="float", example=20.5)
  *         ),
  *         description="The coordinates of the difference"
+ *     ),
+ *     @OA\Property(
+ *         property="images",
+ *         type="array",
+ *         @OA\Items(
+ *             type="string",
+ *             format="binary"
+ *         ),
+ *         description="The images of the difference"
  *     )
  * )
  */
@@ -51,10 +64,8 @@ class StoreDifferenceRequest extends FormRequest
             'game_level' => 'required|string',
             'game_id' => 'required|integer',
             'coordinates' => 'required|array',
-            'coordinates.*.x1' => 'required|float',
-            'coordinates.*.y1' => 'required|float',
-            'coordinates.*.x2' => 'required|float',
-            'coordinates.*.y2' => 'required|float',
+            'coordinates.*.x' => 'required|float',
+            'coordinates.*.y' => 'required|float',
             'images' => 'required|array',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];

@@ -3252,7 +3252,9 @@
             "StoreDifferenceRequest": {
                 "required": [
                     "game_level",
-                    "coordinates"
+                    "game_id",
+                    "coordinates",
+                    "images"
                 ],
                 "properties": {
                     "game_level": {
@@ -3260,35 +3262,40 @@
                         "type": "string",
                         "example": "1"
                     },
+                    "game_id": {
+                        "description": "The ID of the game",
+                        "type": "integer",
+                        "example": 1
+                    },
                     "coordinates": {
                         "description": "The coordinates of the difference",
                         "type": "array",
                         "items": {
                             "required": [
-                                "x1",
-                                "y1",
-                                "x2",
-                                "y2"
+                                "x",
+                                "y"
                             ],
                             "properties": {
-                                "x1": {
-                                    "type": "integer",
-                                    "example": 10
+                                "x": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 10.5
                                 },
-                                "y1": {
-                                    "type": "integer",
-                                    "example": 20
-                                },
-                                "x2": {
-                                    "type": "integer",
-                                    "example": 30
-                                },
-                                "y2": {
-                                    "type": "integer",
-                                    "example": 40
+                                "y": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 20.5
                                 }
                             },
                             "type": "object"
+                        }
+                    },
+                    "images": {
+                        "description": "The images of the difference",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
                         }
                     }
                 },
@@ -3302,35 +3309,27 @@
                 "properties": {
                     "game_level": {
                         "description": "The level of the game",
-                        "type": "integer",
-                        "example": 1
+                        "type": "string",
+                        "example": "1"
                     },
                     "coordinates": {
                         "description": "The coordinates of the difference",
                         "type": "array",
                         "items": {
                             "required": [
-                                "x1",
-                                "y1",
-                                "x2",
-                                "y2"
+                                "x",
+                                "y"
                             ],
                             "properties": {
-                                "x1": {
-                                    "type": "integer",
-                                    "example": 10
+                                "x": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 10.5
                                 },
-                                "y1": {
-                                    "type": "integer",
-                                    "example": 20
-                                },
-                                "x2": {
-                                    "type": "integer",
-                                    "example": 30
-                                },
-                                "y2": {
-                                    "type": "integer",
-                                    "example": 40
+                                "y": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 20.5
                                 }
                             },
                             "type": "object"

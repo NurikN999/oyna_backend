@@ -11,20 +11,18 @@ use Illuminate\Foundation\Http\FormRequest;
  *     required={"game_level", "coordinates"},
  *     @OA\Property(
  *         property="game_level",
- *         type="integer",
+ *         type="string",
  *         description="The level of the game",
- *         example=1
+ *         example="1"
  *     ),
  *     @OA\Property(
  *         property="coordinates",
  *         type="array",
  *         @OA\Items(
  *             type="object",
- *             required={"x1", "y1", "x2", "y2"},
- *             @OA\Property(property="x1", type="integer", example=10),
- *             @OA\Property(property="y1", type="integer", example=20),
- *             @OA\Property(property="x2", type="integer", example=30),
- *             @OA\Property(property="y2", type="integer", example=40)
+ *             required={"x", "y"},
+ *             @OA\Property(property="x", type="number", format="float", example=10.5),
+ *             @OA\Property(property="y", type="number", format="float", example=20.5)
  *         ),
  *         description="The coordinates of the difference"
  *     )
@@ -50,10 +48,8 @@ class UpdateDifferenceRequest extends FormRequest
         return [
             'game_level' => 'string',
             'coordinates' => 'array',
-            'coordinates.*.x1' => 'float',
-            'coordinates.*.y1' => 'float',
-            'coordinates.*.x2' => 'float',
-            'coordinates.*.y2' => 'float',
+            'coordinates.*.x' => 'float',
+            'coordinates.*.y' => 'float',
         ];
     }
 }

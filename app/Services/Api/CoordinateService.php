@@ -13,11 +13,9 @@ class CoordinateService
     {
         $coordinates = collect($coordinates)->map(function ($coordinateData) use ($difference) {
             return new DifferenceCoordinates([
-                'card_id' => $difference->id,
-                'x1' => $coordinateData['x1'],
-                'y1' => $coordinateData['y1'],
-                'x2' => $coordinateData['x2'],
-                'y2' => $coordinateData['y2'],
+                'difference_id' => $difference->id,
+                'x' => $coordinateData['x'],
+                'y' => $coordinateData['y'],
             ]);
         });
 
