@@ -48,8 +48,8 @@ class UpdateDifferenceRequest extends FormRequest
         return [
             'game_level' => 'string',
             'coordinates' => 'array',
-            'coordinates.*.x' => 'float',
-            'coordinates.*.y' => 'float',
+            'coordinates.*.x' => 'numeric',
+            'coordinates.*.y' => 'numeric',
         ];
     }
 }
