@@ -1881,9 +1881,7 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/music/{id}": {
+            },
             "delete": {
                 "tags": [
                     "Music"
@@ -1927,7 +1925,7 @@
                 ]
             }
         },
-        "/api/music/genres": {
+        "/api/musics/genres": {
             "get": {
                 "tags": [
                     "Music"
@@ -2932,6 +2930,70 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/user/{userId}/trade": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Trade user points for a prize",
+                "description": "Trade a specified number of user points for a prize. Returns the updated user data.",
+                "operationId": "tradePointsToPrize",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "points"
+                                ],
+                                "properties": {
+                                    "points": {
+                                        "description": "The number of points to trade",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Points traded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }

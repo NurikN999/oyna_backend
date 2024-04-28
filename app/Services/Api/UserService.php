@@ -46,4 +46,16 @@ class UserService
     {
         return $user->delete();
     }
+
+    public function tradePoints(User $user, array $data)
+    {
+        if ($user->points < $data['points']) {
+            throw new \Exception('Не достаточно баллов для обмена');
+        }
+        $user->points -= $data['points'];
+        $user->prizes()->attach($data['prize_id'], $data['city_id'], $data['address']);
+        $user->save();
+
+        return $user;
+    }
 }

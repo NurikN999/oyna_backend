@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest\TradePrizeRequest;
 use App\Http\Requests\UserRequest\UpdateUserRequest;
 use App\Http\Resources\Api\UserResource;
 use App\Models\User;
@@ -204,6 +205,61 @@ class UserController extends Controller
         return response()->json([
             'data' => null
         ], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/user/{userId}/trade",
+     *     tags={"Users"},
+     *     summary="Trade user points for a prize",
+     *     description="Trade a specified number of user points for a prize. Returns the updated user data.",
+     *     operationId="tradePointsToPrize",
+     *     @OA\Parameter(
+     *         name="userId",
+     *         in="path",
+     *         description="The ID of the user",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Input data format",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="points",
+     *                     description="The number of points to trade",
+     *                     type="integer"
+     *                 ),
+     *                 required={"points"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Points traded successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", description="The response message"),
+     *             @OA\Property(property="data", ref="#/components/schemas/UserResource", description="The updated user data"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request"
+     *     )
+     * )
+     */
+    public function tradePointsToPrize(User $user, TradePrizeRequest $request)
+    {
+        $data = $request->all();
+        $user = $this->userService->tradePoints($user, $data);
+
+        return response()->json([
+            'message' => 'Points traded successfully.',
+            'data' => new UserResource($user)
+        ], Response::HTTP_OK);
     }
 
 }
