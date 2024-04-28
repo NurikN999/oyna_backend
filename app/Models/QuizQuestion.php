@@ -23,4 +23,9 @@ class QuizQuestion extends Model
     {
         return $this->hasMany(Option::class);
     }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

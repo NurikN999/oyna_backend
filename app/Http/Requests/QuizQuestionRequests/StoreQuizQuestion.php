@@ -14,6 +14,11 @@ use Illuminate\Foundation\Http\FormRequest;
  *         example="What is the capital of France?"
  *     ),
  *     @OA\Property(
+ *         property="image",
+ *         type="string",
+ *         format="binary"
+ *      ),
+ *     @OA\Property(
  *         property="options",
  *         type="array",
  *         @OA\Items(
@@ -26,11 +31,6 @@ use Illuminate\Foundation\Http\FormRequest;
  *                 property="is_correct",
  *                 type="boolean",
  *                 example=true
- *             ),
- *             @OA\Property(
- *                 property="image",
- *                 type="string",
- *                 format="binary"
  *             )
  *         )
  *     )
@@ -55,10 +55,10 @@ class StoreQuizQuestion extends FormRequest
     {
         return [
             'text' => 'required|string',
+            'image' => 'nullable|image',
             'options' => 'required|array',
             'options.*.text' => 'required|string',
             'options.*.is_correct' => 'required|boolean',
-            'options.*.image' => 'nullable|image',
         ];
     }
 }

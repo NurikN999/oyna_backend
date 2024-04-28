@@ -23,6 +23,10 @@ class QuizService
         $quizQuestion->game_id = $data['game_id'];
         $quizQuestion->save();
 
+        if (isset($data['image']) && $data['iamge']) {
+            $this->imageService->upload($data['image'], QuizQuestion::class, $quizQuestion->id);
+        }
+
         return $quizQuestion;
     }
 
@@ -34,10 +38,6 @@ class QuizService
                 'quiz_question_id' => $quizQuestion->id,
                 'is_correct' => $option['is_correct'],
             ]);
-
-            if ($option['image']) {
-                $this->imageService->upload($option['image'], Option::class, $createdOption->id);
-            }
         }
     }
 
