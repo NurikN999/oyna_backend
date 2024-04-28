@@ -154,8 +154,10 @@ class UserController extends Controller
         $data = $request->validated();
         $user = $this->userService->update($user, $data);
 
-        if ($data['image']) {
-            $this->imageService->upload($data['image'], User::class, $user->id);
+        if (isset($data['image']) && $data['image']) {
+            $user->image()->update([
+                'path' => $this->imageService->upload($data['image'], User::class, $user->id)
+            ]);
         }
 
         return response()->json([
