@@ -64,8 +64,8 @@ class StoreDifferenceRequest extends FormRequest
             'game_level' => 'required|string',
             'game_id' => 'required|integer',
             'coordinates' => 'required|array',
-            'coordinates.*.x' => 'required|float',
-            'coordinates.*.y' => 'required|float',
+            'coordinates.*.x' => 'required|numeric',
+            'coordinates.*.y' => 'required|numeric',
             'images' => 'required|array',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
