@@ -20,7 +20,7 @@ class QuizService
     {
         $quizQuestion = new QuizQuestion();
         $quizQuestion->text = $data['text'];
-        $quizQuestion->game_id = $data['game_id'];
+        $quizQuestion->game_id = 1;
         $quizQuestion->save();
 
         if (isset($data['image']) && $data['iamge']) {
