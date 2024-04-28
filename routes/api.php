@@ -91,6 +91,14 @@ Route::prefix('differences')->group(function () {
     Route::get('/{difference}', [DifferenceController::class, 'show']);
 });
 
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/{user}', [UserController::class, 'show']);
+    Route::patch('/{user}', [UserController::class, 'update']);
+    Route::delete('/{user}', [UserController::class, 'destroy']);
+    Route::post('/{user}/trade', [UserController::class, 'tradePointsToPrize']);
+});
+
 Route::middleware('jwt.auth')->group(function () {
 
     Route::prefix('users')->group(function () {

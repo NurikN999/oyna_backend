@@ -4,6 +4,32 @@ namespace App\Http\Requests\UserRequest;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="TradePrizeRequest",
+ *     required={"points", "prize_id", "city_id", "address"},
+ *     @OA\Property(
+ *         property="points",
+ *         type="integer",
+ *         description="The number of points to trade"
+ *     ),
+ *     @OA\Property(
+ *         property="prize_id",
+ *         type="integer",
+ *         description="The ID of the prize"
+ *     ),
+ *     @OA\Property(
+ *         property="city_id",
+ *         type="integer",
+ *         description="The ID of the city"
+ *     ),
+ *     @OA\Property(
+ *         property="address",
+ *         type="string",
+ *         description="The address for the prize delivery"
+ *     ),
+ * )
+ */
 class TradePrizeRequest extends FormRequest
 {
     /**

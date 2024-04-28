@@ -3550,6 +3550,33 @@
                 },
                 "type": "object"
             },
+            "TradePrizeRequest": {
+                "required": [
+                    "points",
+                    "prize_id",
+                    "city_id",
+                    "address"
+                ],
+                "properties": {
+                    "points": {
+                        "description": "The number of points to trade",
+                        "type": "integer"
+                    },
+                    "prize_id": {
+                        "description": "The ID of the prize",
+                        "type": "integer"
+                    },
+                    "city_id": {
+                        "description": "The ID of the city",
+                        "type": "integer"
+                    },
+                    "address": {
+                        "description": "The address for the prize delivery",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "UpdateUserRequest": {
                 "title": "UpdateUserRequest",
                 "required": [
