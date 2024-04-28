@@ -85,7 +85,7 @@ class DifferenceController extends Controller
         $data = $request->validated();
         $difference = Difference::create([
             'game_level' => $data['game_level'],
-            'game_id' => $data['game_id'],
+            'game_id' => 3,
         ]);
 
         $this->coordinateService->saveCoordinates($difference, $data);
