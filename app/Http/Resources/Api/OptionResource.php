@@ -35,7 +35,6 @@ class OptionResource extends JsonResource
             'text' => $this->text,
             'is_correct' => $this->is_correct,
             'quiz_question_id' => $this->quiz_question_id,
-            'image' => new ImageResource($this->image),
         ];
     }
 }

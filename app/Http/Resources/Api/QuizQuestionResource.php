@@ -48,6 +48,7 @@ class QuizQuestionResource extends JsonResource
             'id' => $this->id,
             'text' => $this->text,
             'game_id' => $this->game_id,
+            'image' => new ImageResource($this->image),
             'options' => OptionResource::collection($this->options),
         ];
     }
