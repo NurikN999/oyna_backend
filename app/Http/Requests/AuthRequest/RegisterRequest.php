@@ -93,7 +93,7 @@ class RegisterRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'nullable|string',
             'email' => 'nullable|email|unique:users,email',
-            'age' => 'required|integer',
+            'age' => 'nullable|integer',
             'phone_number' => 'required|string',
             'interests' => 'nullable|string',
             'teams' => 'nullable|string',
