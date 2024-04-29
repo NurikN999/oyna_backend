@@ -9,11 +9,16 @@ class DifferenceCoordinates extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['difference_id', 'x1', 'y1', 'x2', 'y2'];
+    protected $fillable = ['difference_id', 'x', 'y'];
 
     public function difference()
     {
         return $this->belongsTo(Difference::class);
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 
 }

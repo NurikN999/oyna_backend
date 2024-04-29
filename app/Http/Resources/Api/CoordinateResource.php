@@ -45,10 +45,9 @@ class CoordinateResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'x1' => $this->x1,
-            'y1' => $this->y1,
-            'x2' => $this->x2,
-            'y2' => $this->y2,
+            'difference_id' => $this->difference_id,
+            'x' => $this->x,
+            'y' => $this->y,
         ];
     }
 }

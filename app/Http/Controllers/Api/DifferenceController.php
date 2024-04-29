@@ -87,11 +87,12 @@ class DifferenceController extends Controller
             'game_level' => $data['game_level'],
             'game_id' => 3,
         ]);
+        $this->coordinateService->saveCoordinates($difference, $data['coordinates']);
 
-        $this->coordinateService->saveCoordinates($difference, $data);
-
-        foreach($data['images'] as $image) {
-            $this->imageService->upload($image, Difference::class, $difference->id);
+        if (isset($data['images'])) {
+            foreach($data['images'] as $image) {
+                $this->imageService->upload($image, Difference::class, $difference->id);
+            }
         }
 
         return response()->json(
