@@ -43,6 +43,19 @@ class QuizService
 
     public function updateQuizQuestion(QuizQuestion $quizQuestion, array $data): QuizQuestion
     {
+        foreach ($data['options'] as $option) {
+            $quizQuestion->options()->updateOrCreate(
+                ['id' => $option['id']],
+                [
+                    'text' => $option['text'],
+                    'is_correct' => $option['is_correct'] === "true" ? true : false,
+                ]
+            );
+        }
+        if (isset($data['image']) && $data['image']) {
+            $this->imageService->upload($data['image'], QuizQuestion::class, $quizQuestion->id);
+        }
+
         $quizQuestion->update($data);
 
         return $quizQuestion;
