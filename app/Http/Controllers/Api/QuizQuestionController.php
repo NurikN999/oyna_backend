@@ -39,7 +39,7 @@ class QuizQuestionController extends Controller
      */
     public function index()
     {
-        $quizQuestions = QuizQuestion::paginate(1);
+        $quizQuestions = QuizQuestion::all();
 
         return response()->json([
             'data' => QuizQuestionResource::collection($quizQuestions),
