@@ -68,7 +68,7 @@ class QuizService
                 ['id' => $option['id']],
                 [
                     'text' => $option['text'],
-                    'is_correct' => $option['is_correct'],
+                    'is_correct' => $option['is_correct'] === "true" ? true : false,
                 ]
             );
 
