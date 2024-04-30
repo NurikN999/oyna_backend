@@ -7,6 +7,7 @@ use App\Http\Requests\AuthRequest\LoginRequest;
 use App\Http\Requests\AuthRequest\RegisterRequest;
 use App\Http\Resources\Api\UserResource;
 use App\Jobs\SendVerificationCode;
+use App\Models\Point;
 use App\Models\User;
 use App\Services\Api\PointsService;
 use App\Services\Api\UserService;
@@ -258,6 +259,11 @@ class AuthController extends Controller
             $user = $data['user'];
             $user->is_active = true;
             $user->save();
+
+            Point::create([
+                'user_id' => $user->id,
+                'amount' => 0
+            ]);
 
             $token = JWTAuth::fromUser($user);
             $message = 'User registered successfully';
