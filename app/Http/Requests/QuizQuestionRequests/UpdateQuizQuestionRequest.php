@@ -56,10 +56,10 @@ class UpdateQuizQuestionRequest extends FormRequest
         return [
             'text' => 'nullable|string',
             'options' => 'nullable|array',
+            'image' => 'nullable|image',
             'options.*.text' => 'nullable|string',
             'options.*.id' => 'nullable|string',
             'options.*.is_correct' => 'nullable|string',
-            'options.*.image' => 'nullable|image',
         ];
     }
 }
