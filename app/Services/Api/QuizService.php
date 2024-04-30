@@ -72,7 +72,7 @@ class QuizService
                 ]
             );
 
-            if ($option['image']) {
+            if (isset($option['image']) && $option['image']) {
                 $this->imageService->upload($option['image'], Option::class, $option['id']);
             }
         }
