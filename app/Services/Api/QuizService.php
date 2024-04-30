@@ -23,7 +23,7 @@ class QuizService
         $quizQuestion->game_id = 1;
         $quizQuestion->save();
 
-        if (isset($data['image']) && $data['iamge']) {
+        if (isset($data['image']) && $data['image']) {
             $this->imageService->upload($data['image'], QuizQuestion::class, $quizQuestion->id);
         }
 
