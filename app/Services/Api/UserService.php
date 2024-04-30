@@ -57,6 +57,7 @@ class UserService
         }
         $user->points->balance -= $prize->point_amount;
         $user->prizes()->attach($data['prize_id'], ['city_id' => $data['city_id'], 'address' => $data['address']]);
+        $user->points->save();
         $user->save();
 
         return $user;
