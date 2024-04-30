@@ -48,7 +48,6 @@ class TradePrizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'points' => 'required|integer',
             'prize_id' => 'required|integer',
             'city_id' => 'required|integer',
             'address' => 'required|string',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Api;
 
+use App\Models\Prize;
 use App\Models\User;
 
 class UserService
@@ -49,10 +50,12 @@ class UserService
 
     public function tradePoints(User $user, array $data)
     {
-        if ($user->points < $data['points']) {
+        $prize = Prize::find($data['prize_id']);
+
+        if ($user->points->balance < $prize->point_amount) {
             throw new \Exception('Не достаточно баллов для обмена');
         }
-        $user->points -= $data['points'];
+        $user->points->balance -= $prize->point_amount;
         $user->prizes()->attach($data['prize_id'], ['city_id' => $data['city_id'], 'address' => $data['address']]);
         $user->save();
 
