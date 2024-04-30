@@ -35,7 +35,7 @@ class ImageService
 
     public function delete(Image $image)
     {
-        Storage::disk('public')->delete($image->path);
+        $this->s3Service->deleteFileFromS3($image->path);
         $image->delete();
     }
 

@@ -16,4 +16,11 @@ class S3Service
 
         return $disk->url($path);
     }
+
+    public function deleteFileFromS3(string $path): void
+    {
+        $disk = Storage::disk('ps');
+
+        $disk->delete($path);
+    }
 }
