@@ -53,7 +53,7 @@ class UserService
             throw new \Exception('Не достаточно баллов для обмена');
         }
         $user->points -= $data['points'];
-        $user->prizes()->attach($data['prize_id'], $data['city_id'], $data['address']);
+        $user->prizes()->attach($data['prize_id'], ['city_id' => $data['city_id'], 'address' => $data['address']]);
         $user->save();
 
         return $user;
