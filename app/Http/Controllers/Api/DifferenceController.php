@@ -91,7 +91,9 @@ class DifferenceController extends Controller
 
         if (isset($data['images'])) {
             foreach($data['images'] as $image) {
-                $this->imageService->upload($image, Difference::class, $difference->id);
+                $difference->images()->create([
+                    'image' => $this->imageService->upload($image, Difference::class, $difference->id),
+                ]);
             }
         }
 
