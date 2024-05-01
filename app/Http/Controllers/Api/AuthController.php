@@ -262,7 +262,7 @@ class AuthController extends Controller
 
             Point::create([
                 'user_id' => $user->id,
-                'amount' => 0
+                'balance' => 0
             ]);
 
             $token = JWTAuth::fromUser($user);
