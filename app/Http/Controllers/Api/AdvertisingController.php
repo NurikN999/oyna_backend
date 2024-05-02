@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\AdvertisingPlacementAreaType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdvertisingRequest\StoreAdvertisingRequest;
 use App\Http\Requests\AdvertisingRequest\UpdateAdvertisingRequest;
@@ -213,6 +214,36 @@ class AdvertisingController extends Controller
 
         return response()->json([
             'message' => 'Advertising deleted successfully'
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/advertising/types",
+     *     summary="Get all advertising placement area types",
+     *     tags={"Advertising"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/AdvertisingPlacementAreaType")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Server error",
+     *     ),
+     * )
+     */
+    public function types()
+    {
+        return response()->json([
+            'data' => AdvertisingPlacementAreaType::all()
         ]);
     }
 }

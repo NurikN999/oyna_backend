@@ -206,6 +206,36 @@
                 }
             }
         },
+        "/api/advertising/types": {
+            "get": {
+                "tags": [
+                    "Advertising"
+                ],
+                "summary": "Get all advertising placement area types",
+                "operationId": "16590b15da63baf5a40fa96e38eb4e4b",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AdvertisingPlacementAreaType"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
         "/api/analytics": {
             "get": {
                 "tags": [
@@ -3046,6 +3076,26 @@
     },
     "components": {
         "schemas": {
+            "AdvertisingPlacementAreaType": {
+                "properties": {
+                    "id": {
+                        "description": "The value of the advertising placement area type",
+                        "type": "string",
+                        "example": "home_page"
+                    },
+                    "name": {
+                        "description": "The title of the advertising placement area type",
+                        "type": "string",
+                        "example": "Главная страница"
+                    }
+                },
+                "type": "object",
+                "enum": [
+                    "HOME_PAGE",
+                    "SIDE_PANEL",
+                    "AFTER_OYNA_BUTTON"
+                ]
+            },
             "EntertainmentType": {
                 "description": "The genre of the music",
                 "type": "string",

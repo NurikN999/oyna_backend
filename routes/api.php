@@ -73,6 +73,7 @@ Route::prefix('prizes')->group(function () {
 });
 Route::prefix('advertisings')->group(function () {
     Route::get('/', [AdvertisingController::class, 'index']);
+    Route::get('/types', [AdvertisingController::class, 'types']);
     Route::get('/{advertising}', [AdvertisingController::class, 'show']);
 });
 Route::prefix('games')->group(function () {
