@@ -55,9 +55,7 @@ class DifferenceResource extends JsonResource
             'game_level' => $this->game_level,
             'game_id' => $this->game_id,
             'coordinates' => CoordinateResource::collection($this->coordinates),
-            'images' => $this->coordinates->flatMap(function ($coordinate) {
-                return ImageResource::collection($coordinate->images);
-            }),
+            'images' => ImageResource::collection($this->whenLoaded('images')),
         ];
     }
 }

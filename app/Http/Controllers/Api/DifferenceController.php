@@ -91,16 +91,14 @@ class DifferenceController extends Controller
 
         if (isset($data['images'])) {
             foreach($data['images'] as $image) {
-                $difference->images()->create([
-                    'image' => $this->imageService->upload($image, Difference::class, $difference->id),
-                ]);
+                $this->imageService->upload($image, Difference::class, $difference->id);
             }
         }
 
         return response()->json(
             [
                 'message' => 'Difference created successfully',
-                'data' => new DifferenceResource($difference),
+                'data' => new DifferenceResource($difference->load('images')),
             ],
             201
         );
@@ -129,7 +127,7 @@ class DifferenceController extends Controller
         return response()->json(
             [
                 'message' => 'Difference retrieved successfully',
-                'data' => new DifferenceResource($difference),
+                'data' => new DifferenceResource($difference->load('images')),
             ],
             200
         );
@@ -170,7 +168,7 @@ class DifferenceController extends Controller
         return response()->json(
             [
                 'message' => 'Difference updated successfully',
-                'data' => new DifferenceResource($difference),
+                'data' => new DifferenceResource($difference->load('images')),
             ],
             200
         );
