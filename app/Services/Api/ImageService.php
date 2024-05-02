@@ -33,6 +33,22 @@ class ImageService
         return $image;
     }
 
+    public function update($file, string $imageableType, int $imageableId)
+    {
+        $fileName = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+        $path = 'images/' . $fileName;
+
+        $link = $this->s3Service->uploadFileToS3($file, $path);
+
+        $image = Image::where('imageable_type', $imageableType)->where('imageable_id', $imageableId)->first();
+        $image->update([
+            'path' => $link,
+        ]);
+
+        return $image;
+
+    }
+
     public function delete(Image $image)
     {
         $this->s3Service->deleteFileFromS3($image->path);

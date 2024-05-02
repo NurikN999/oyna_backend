@@ -56,9 +56,7 @@ class QuizService
             if ($quizQuestion->image) {
                 $this->imageService->delete($quizQuestion->image);
             }
-            $quizQuestion->image()->update([
-                'path' => $this->imageService->upload($data['image'], QuizQuestion::class, $quizQuestion->id),
-            ]);
+            $this->imageService->update($data['image'], QuizQuestion::class, $quizQuestion->id);
         }
 
         $quizQuestion->update($data);
