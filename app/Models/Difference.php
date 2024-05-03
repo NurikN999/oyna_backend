@@ -16,9 +16,9 @@ class Difference extends Model
         return $this->belongsTo(Game::class);
     }
 
-    public function image()
+    public function images()
     {
-        return $this->hasOne(Image::class);
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function coordinates()
