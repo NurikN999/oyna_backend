@@ -40,7 +40,9 @@ class AdvertisingController extends Controller
      */
     public function index()
     {
-        return AdvertisingResource::collection(Advertising::paginate(10));
+        return response()->json([
+            'data' => AdvertisingResource::collection(Advertising::all())
+        ]);
     }
 
     /**
@@ -116,7 +118,9 @@ class AdvertisingController extends Controller
      */
     public function show(Advertising $advertising)
     {
-        return new AdvertisingResource($advertising);
+        return response()->json([
+            'data' => new AdvertisingResource($advertising)
+        ]);
     }
 
     /**
@@ -169,7 +173,8 @@ class AdvertisingController extends Controller
         $advertising->update($data);
 
         return response()->json([
-            'message' => 'Advertising updated successfully'
+            'message' => 'Advertising updated successfully',
+            'data' => new AdvertisingResource($advertising)
         ]);
     }
 
@@ -214,7 +219,7 @@ class AdvertisingController extends Controller
 
         return response()->json([
             'message' => 'Advertising deleted successfully'
-        ]);
+        ], 204);
     }
 
     /**
