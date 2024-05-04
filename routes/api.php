@@ -100,6 +100,10 @@ Route::prefix('users')->group(function () {
     Route::post('/{user}/trade', [UserController::class, 'tradePointsToPrize']);
 });
 
+Route::prefix('leaderboard')->group(function() {
+    Route::get('/', [UserController::class, 'leaderboard']);
+});
+
 Route::middleware('jwt.auth')->group(function () {
 
     Route::prefix('users')->group(function () {

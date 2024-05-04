@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest\TradePrizeRequest;
 use App\Http\Requests\UserRequest\UpdateUserRequest;
+use App\Http\Resources\Api\LeaderboardResource;
 use App\Http\Resources\Api\UserResource;
 use App\Models\User;
 use App\Services\Api\ImageService;
@@ -262,6 +263,41 @@ class UserController extends Controller
             'message' => 'Points traded successfully.',
             'data' => new UserResource($user)
         ], Response::HTTP_OK);
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/leaderboard",
+     *     summary="Get top 4 users with the highest points balance",
+     *     tags={"Users"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/LeaderboardResource")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Server error",
+     *     ),
+     * )
+     */
+    public function leaderboard()
+    {
+        $users = User::with('points')->get()->sortByDesc(function($user) {
+            return $user->points->balance;
+        })->take(4);
+
+        return response()->json([
+            'data' => LeaderboardResource::collection($users),
+        ], 200);
     }
 
 }

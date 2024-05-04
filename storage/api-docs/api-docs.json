@@ -3072,6 +3072,36 @@
                     }
                 }
             }
+        },
+        "/api/leaderboard": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get top 4 users with the highest points balance",
+                "operationId": "e5e0e937bab0b2d8bac4c0d1634b9b69",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/LeaderboardResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -3999,6 +4029,31 @@
                     "imageable_id": {
                         "type": "integer",
                         "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "LeaderboardResource": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the user",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "first_name": {
+                        "description": "The first name of the user",
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "last_name": {
+                        "description": "The last name of the user",
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "points": {
+                        "description": "The points balance of the user",
+                        "type": "integer",
+                        "example": 100
                     }
                 },
                 "type": "object"
