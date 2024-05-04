@@ -43,7 +43,7 @@ class DifferenceController extends Controller
         return response()->json(
             [
                 'message' => 'Differences retrieved successfully',
-                'data' => DifferenceResource::collection($differences),
+                'data' => DifferenceResource::collection($differences->load('images')),
             ],
             200
         );
