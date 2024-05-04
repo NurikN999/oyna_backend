@@ -44,6 +44,8 @@ class ImageResource extends JsonResource
             'path' => $this->path,
             'imageable_type' => $this->imageable_type,
             'imageable_id' => $this->imageable_id,
+            'width' => $this->width ?? 0,
+            'height' => $this->height ?? 0,
         ];
     }
 }

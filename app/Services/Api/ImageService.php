@@ -23,11 +23,14 @@ class ImageService
         $path = 'images/' . $fileName;
 
         $link = $this->s3Service->uploadFileToS3($file, $path);
+        list($width, $height) = getimagesize($file);
 
         $image = Image::create([
             'path' => $link,
             'imageable_type' => $imageableType,
-            'imageable_id' => $imageableId
+            'imageable_id' => $imageableId,
+            'width' => $width,
+            'height' => $height,
         ]);
 
         return $image;
@@ -39,10 +42,13 @@ class ImageService
         $path = 'images/' . $fileName;
 
         $link = $this->s3Service->uploadFileToS3($file, $path);
+        list($width, $height) = getimagesize($file);
 
         $image = Image::where('imageable_type', $imageableType)->where('imageable_id', $imageableId)->first();
         $image->update([
             'path' => $link,
+            'width' => $width,
+            'height' => $height,
         ]);
 
         return $image;
