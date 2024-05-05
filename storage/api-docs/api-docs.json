@@ -1457,6 +1457,36 @@
                 }
             }
         },
+        "/api/game/level": {
+            "get": {
+                "tags": [
+                    "Game"
+                ],
+                "summary": "Get all game level types",
+                "operationId": "75c8a189be9d683ac773d2e0220fa9d6",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GameLevelType"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
         "/api/hospitality-venues": {
             "get": {
                 "tags": [
@@ -3136,6 +3166,26 @@
                     "museum",
                     "park",
                     "anticafe"
+                ]
+            },
+            "GameLevelType": {
+                "properties": {
+                    "id": {
+                        "description": "The value of the game level type",
+                        "type": "string",
+                        "example": "easy"
+                    },
+                    "name": {
+                        "description": "The title of the game level type",
+                        "type": "string",
+                        "example": "Легкий"
+                    }
+                },
+                "type": "object",
+                "enum": [
+                    "Easy",
+                    "Medium",
+                    "Hard"
                 ]
             },
             "MusicGenreType": {

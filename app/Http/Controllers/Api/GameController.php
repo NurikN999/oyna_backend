@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\GameLevelType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\GameResource;
 use App\Models\Game;
@@ -117,6 +118,36 @@ class GameController extends Controller
         return response()->json([
             'message' => 'Зарегистрируйтесь или войдите, чтобы получить свои баллы.',
             'unique_id' => $uniqueId,
+        ], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/game/level",
+     *     summary="Get all game level types",
+     *     tags={"Game"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/GameLevelType")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Server error",
+     *     ),
+     * )
+     */
+    public function getGameLevel()
+    {
+        return response()->json([
+            'data' => GameLevelType::all(),
         ], 200);
     }
 }
