@@ -89,10 +89,10 @@ class DifferenceController extends Controller
         ]);
         $this->coordinateService->saveCoordinates($difference, $data['coordinates']);
 
-        if (isset($data['images'])) {
-            foreach($data['images'] as $image) {
-                $this->imageService->upload($image, Difference::class, $difference->id);
-            }
+        if (isset($data['first_images']) && isset($data['second_images'])) {
+            $this->imageService->upload($data['first_image'], Difference::class, $difference->id, $data['width'], $data['height']);
+            $this->imageService->upload($data['second_image'], Difference::class, $difference->id, $data['width'], $data['height']);
+
         }
 
         return response()->json(

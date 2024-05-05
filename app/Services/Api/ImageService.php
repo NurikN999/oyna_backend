@@ -17,12 +17,11 @@ class ImageService
         $this->s3Service = $s3Service;
     }
 
-    public function upload($file, string $imageableType, int $imageableId)
+    public function upload($file, string $imageableType, int $imageableId, int $width, int $height)
     {
         $fileName = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
         $path = 'images/' . $fileName;
 
-        list($width, $height) = getimagesize($file);
         $link = $this->s3Service->uploadFileToS3($file, $path);
 
         $image = Image::create([
