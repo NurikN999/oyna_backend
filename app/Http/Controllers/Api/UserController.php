@@ -292,7 +292,7 @@ class UserController extends Controller
     public function leaderboard()
     {
         $users = User::with('points')->get()->sortByDesc(function($user) {
-            return $user->points->balance;
+            return $user->points ? $user->points->balance : 0;
         })->take(4);
 
         return response()->json([
