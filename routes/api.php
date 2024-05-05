@@ -77,10 +77,10 @@ Route::prefix('advertisings')->group(function () {
     Route::get('/{advertising}', [AdvertisingController::class, 'show']);
 });
 Route::prefix('games')->group(function () {
+    Route::get('/levels', [GameController::class, 'getGameLevel']);
     Route::get('/', [GameController::class, 'index']);
     Route::get('/{game}', [GameController::class, 'show']);
     Route::post('/{game}/finish', [GameController::class, 'finishGame']);
-    Route::get('/levels', [GameController::class, 'getGameLevel']);
 });
 
 Route::prefix('quiz-questions')->group(function () {

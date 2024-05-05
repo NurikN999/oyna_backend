@@ -25,7 +25,7 @@ enum GameLevelType: string {
     case Medium = 'medium';
     case Hard = 'hard';
 
-    public function titles(): array
+    public static function titles(): array
     {
         return [
             self::Easy->value => 'Легкий',

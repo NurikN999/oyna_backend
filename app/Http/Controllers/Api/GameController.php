@@ -7,10 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\GameResource;
 use App\Models\Game;
 use App\Services\Api\PointsService;
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\RoundBlockSizeMode;
-use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
