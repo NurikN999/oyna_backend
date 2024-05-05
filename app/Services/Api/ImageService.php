@@ -42,7 +42,7 @@ class ImageService
         $path = 'images/' . $fileName;
 
         $link = $this->s3Service->uploadFileToS3($file, $path);
-        list($width, $height) = getimagesize($file);
+        list($width, $height) = getimagesize($file->getRealPath());
 
         $image = Image::where('imageable_type', $imageableType)->where('imageable_id', $imageableId)->first();
         $image->update([
