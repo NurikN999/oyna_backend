@@ -22,8 +22,8 @@ class ImageService
         $fileName = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
         $path = 'images/' . $fileName;
 
-        $link = $this->s3Service->uploadFileToS3($file, $path);
         list($width, $height) = getimagesize($file);
+        $link = $this->s3Service->uploadFileToS3($file, $path);
 
         $image = Image::create([
             'path' => $link,
