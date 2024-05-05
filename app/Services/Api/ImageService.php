@@ -17,7 +17,7 @@ class ImageService
         $this->s3Service = $s3Service;
     }
 
-    public function upload($file, string $imageableType, int $imageableId, int $width, int $height)
+    public function upload($file, string $imageableType, int $imageableId, int $width = 0, int $height = 0)
     {
         $fileName = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
         $path = 'images/' . $fileName;
