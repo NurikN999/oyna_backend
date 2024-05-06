@@ -201,7 +201,7 @@ class BannerController extends Controller
         $data = $request->validated();
         $banner->update($data);
 
-        if ($data['image']) {
+        if (isset($data['image']) && $data['image']) {
             $this->imageService->delete($banner->image);
             $this->imageService->upload($request->file('image'), Banner::class, $banner->id);
         }
