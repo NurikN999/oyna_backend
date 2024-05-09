@@ -55,6 +55,14 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
+            if (User::where('phone_number', $request->phone_number)->exists()) {
+                return response()->json(
+                    [
+                        'message' => 'Пользователь с таким номером телефона уже существует'
+                    ],
+                    400
+                );
+            }
             $data = array_merge(
                 $request->validated(),
                 [
