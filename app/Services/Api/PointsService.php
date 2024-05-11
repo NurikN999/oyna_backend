@@ -32,9 +32,7 @@ class PointsService
 
         DB::transaction(function () use ($userId, $points) {
             $user = User::find($userId);
-            $pointsRecord = $user->points()->firstOrCreate([
-                'balance' => 0,
-            ]);
+            $pointsRecord = $user->points()->firstOrCreate();
             $pointsRecord->balance += $points;
             $pointsRecord->save();
 
