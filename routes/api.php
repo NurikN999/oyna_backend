@@ -35,70 +35,73 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/verify', [AuthController::class, 'verify']);
 });
-Route::prefix('cities')->group(function () {
-    Route::get('/', [CityController::class, 'index']);
-    Route::get('/{city}', [CityController::class, 'show']);
-});
-Route::prefix('entertainments')->group(function () {
-    Route::get('/', [EntertainmentController::class, 'index']);
-    Route::get('/types', [EntertainmentController::class, 'types']);
-    Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
-});
-Route::prefix('musics')->group(function () {
-    Route::get('/genres', [MusicController::class, 'genres']);
-    Route::get('/', [MusicController::class, 'index']);
-    Route::get('/{music}', [MusicController::class, 'show']);
-});
-Route::prefix('hospitality-venues')->group(function () {
-    Route::get('/types', [HospitalityVenueController::class, 'types']);
-    Route::get('/', [HospitalityVenueController::class, 'index']);
-    Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
-    Route::get('/{hospitalityVenue}/qr-code', [HospitalityVenueController::class, 'showQrCode']);
-});
-Route::prefix('banners')->group(function () {
-    Route::get('/', [BannerController::class, 'index']);
-    Route::get('/{banner}', [BannerController::class, 'show']);
-});
-Route::prefix('partners')->group(function () {
-    Route::get('/', [PartnerController::class, 'index']);
-    Route::get('/{partner}', [PartnerController::class, 'show']);
-});
-Route::prefix('offers')->group(function () {
-    Route::get('/', [OfferController::class, 'index']);
-    Route::get('/{offer}', [OfferController::class, 'show']);
-});
-Route::prefix('prizes')->group(function () {
-    Route::get('/', [PrizeController::class, 'index']);
-    Route::get('/{prize}', [PrizeController::class, 'show']);
-});
-Route::prefix('advertisings')->group(function () {
-    Route::get('/', [AdvertisingController::class, 'index']);
-    Route::get('/types', [AdvertisingController::class, 'types']);
-    Route::get('/{advertising}', [AdvertisingController::class, 'show']);
-});
-Route::prefix('games')->group(function () {
-    Route::get('/levels', [GameController::class, 'getGameLevel']);
-    Route::get('/', [GameController::class, 'index']);
-    Route::get('/{game}', [GameController::class, 'show']);
-    Route::post('/{game}/finish', [GameController::class, 'finishGame']);
-});
 
-Route::prefix('quiz-questions')->group(function () {
-    Route::get('/', [QuizQuestionController::class, 'index']);
-    Route::get('/{quizQuestion}', [QuizQuestionController::class, 'show']);
-});
+Route::middleware('jwt.auth')->group(function() {
+    Route::prefix('cities')->group(function () {
+        Route::get('/', [CityController::class, 'index']);
+        Route::get('/{city}', [CityController::class, 'show']);
+    });
+    Route::prefix('entertainments')->group(function () {
+        Route::get('/', [EntertainmentController::class, 'index']);
+        Route::get('/types', [EntertainmentController::class, 'types']);
+        Route::get('/{entertainment}', [EntertainmentController::class, 'show']);
+    });
+    Route::prefix('musics')->group(function () {
+        Route::get('/genres', [MusicController::class, 'genres']);
+        Route::get('/', [MusicController::class, 'index']);
+        Route::get('/{music}', [MusicController::class, 'show']);
+    });
+    Route::prefix('hospitality-venues')->group(function () {
+        Route::get('/types', [HospitalityVenueController::class, 'types']);
+        Route::get('/', [HospitalityVenueController::class, 'index']);
+        Route::get('/{hospitalityVenue}', [HospitalityVenueController::class, 'show']);
+        Route::get('/{hospitalityVenue}/qr-code', [HospitalityVenueController::class, 'showQrCode']);
+    });
+    Route::prefix('banners')->group(function () {
+        Route::get('/', [BannerController::class, 'index']);
+        Route::get('/{banner}', [BannerController::class, 'show']);
+    });
+    Route::prefix('partners')->group(function () {
+        Route::get('/', [PartnerController::class, 'index']);
+        Route::get('/{partner}', [PartnerController::class, 'show']);
+    });
+    Route::prefix('offers')->group(function () {
+        Route::get('/', [OfferController::class, 'index']);
+        Route::get('/{offer}', [OfferController::class, 'show']);
+    });
+    Route::prefix('prizes')->group(function () {
+        Route::get('/', [PrizeController::class, 'index']);
+        Route::get('/{prize}', [PrizeController::class, 'show']);
+    });
+    Route::prefix('advertisings')->group(function () {
+        Route::get('/', [AdvertisingController::class, 'index']);
+        Route::get('/types', [AdvertisingController::class, 'types']);
+        Route::get('/{advertising}', [AdvertisingController::class, 'show']);
+    });
+    Route::prefix('games')->group(function () {
+        Route::get('/levels', [GameController::class, 'getGameLevel']);
+        Route::get('/', [GameController::class, 'index']);
+        Route::get('/{game}', [GameController::class, 'show']);
+        Route::post('/{game}/finish', [GameController::class, 'finishGame']);
+    });
 
-Route::prefix('differences')->group(function () {
-    Route::get('/', [DifferenceController::class, 'index']);
-    Route::get('/{difference}', [DifferenceController::class, 'show']);
-});
+    Route::prefix('quiz-questions')->group(function () {
+        Route::get('/', [QuizQuestionController::class, 'index']);
+        Route::get('/{quizQuestion}', [QuizQuestionController::class, 'show']);
+    });
 
-Route::prefix('users')->group(function () {
-    Route::get('/', [UserController::class, 'index']);
-    Route::get('/{user}', [UserController::class, 'show']);
-    Route::patch('/{user}', [UserController::class, 'update']);
-    Route::delete('/{user}', [UserController::class, 'destroy']);
-    Route::post('/{user}/trade', [UserController::class, 'tradePointsToPrize']);
+    Route::prefix('differences')->group(function () {
+        Route::get('/', [DifferenceController::class, 'index']);
+        Route::get('/{difference}', [DifferenceController::class, 'show']);
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/{user}', [UserController::class, 'show']);
+        Route::patch('/{user}', [UserController::class, 'update']);
+        Route::delete('/{user}', [UserController::class, 'destroy']);
+        Route::post('/{user}/trade', [UserController::class, 'tradePointsToPrize']);
+    });
 });
 
 Route::prefix('leaderboard')->group(function() {
