@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\UserDeleted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest\TradePrizeRequest;
 use App\Http\Requests\UserRequest\UpdateUserRequest;
@@ -205,6 +206,9 @@ class UserController extends Controller
     public function destroy(User $user, Request $request)
     {
         $this->userService->delete($user);
+
+        event(new UserDeleted($user));
+
         return response()->json([
             'data' => null
         ], Response::HTTP_NO_CONTENT);
