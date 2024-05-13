@@ -36,11 +36,13 @@ Route::prefix('auth')->group(function () {
     Route::post('/verify', [AuthController::class, 'verify']);
 });
 
+Route::prefix('cities')->group(function () {
+    Route::get('/', [CityController::class, 'index']);
+    Route::get('/{city}', [CityController::class, 'show']);
+});
+
 Route::middleware('jwt.auth')->group(function() {
-    Route::prefix('cities')->group(function () {
-        Route::get('/', [CityController::class, 'index']);
-        Route::get('/{city}', [CityController::class, 'show']);
-    });
+
     Route::prefix('entertainments')->group(function () {
         Route::get('/', [EntertainmentController::class, 'index']);
         Route::get('/types', [EntertainmentController::class, 'types']);
