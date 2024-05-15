@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\HospitalityVenueRequest\StoreHospitalityVenueRequest;
 use App\Http\Requests\HospitalityVenueRequest\UpdateHospitalityVenue;
 use App\Http\Resources\Api\HospitalityVenueResource;
+use App\Models\Click;
 use App\Models\HospitalityVenue;
 use App\Services\Api\ImageService;
 use Endroid\QrCode\ErrorCorrectionLevel;
@@ -134,6 +135,13 @@ class HospitalityVenueController extends Controller
      */
     public function show(HospitalityVenue $hospitalityVenue)
     {
+        Click::create([
+            'field_name' => $hospitalityVenue->title,
+            'field_type' => $hospitalityVenue->type,
+            'field_id' => $hospitalityVenue->id,
+            'click' => 1
+        ]);
+
         return response()->json([
             'data' => new HospitalityVenueResource($hospitalityVenue)
         ], 200);

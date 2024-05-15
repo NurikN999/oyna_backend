@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EntertainmentRequest\EntertainmentStoreRequest;
 use App\Http\Requests\EntertainmentRequest\EntertainmentUpdateRequest;
 use App\Http\Resources\Api\EntertainmentResource;
+use App\Models\Click;
 use App\Models\Entertainment;
 use App\Services\Api\ImageService;
 use Illuminate\Http\Request;
@@ -137,6 +138,13 @@ class EntertainmentController extends Controller
      */
     public function show(Entertainment $entertainment)
     {
+        Click::create([
+            'field_name' => $entertainment->title,
+            'field_type' => 'entertainment',
+            'field_id' => $entertainment->id,
+            'click' => 1
+        ]);
+
         return response()->json([
             'data' => new EntertainmentResource($entertainment)
         ]);

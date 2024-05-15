@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clicks', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('field_id')->nullable();
-            $table->unsignedBigInteger('click');
-            $table->timestamp('created_at')->useCurrent();
+        Schema::table('clicks', function (Blueprint $table) {
+            $table->string('field_name');
+            $table->string('field_type');
         });
     }
 
@@ -25,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('clicks', function (Blueprint $table) {
-            //
+            $table->dropColumn('field_name');
+            $table->string('field_type');
         });
     }
 };

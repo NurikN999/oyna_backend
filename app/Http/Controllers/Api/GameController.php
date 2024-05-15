@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Enums\GameLevelType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\GameResource;
+use App\Models\Click;
 use App\Models\Game;
 use App\Services\Api\PointsService;
 use Illuminate\Http\Request;
@@ -66,6 +67,13 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
+        Click::create([
+            'field_name' => $game->type,
+            'field_type' => 'games',
+            'field_id' => $game->id,
+            'click' => 1
+        ]);
+
         return response()->json([
             'data' => new GameResource($game),
         ], 200);

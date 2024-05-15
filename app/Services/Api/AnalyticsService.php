@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace App\Services\Api;
 
+use App\Models\Click;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AnalyticsService
 {
 
-    public function getAnalytics(string $query, ?string $dateFrom = null, ?string $dateTo = null): array
+    public function getAnalytics(string $query, ?string $dateFrom = null, ?string $dateTo = null, ?string $clickTypes = null): array
     {
         $data = [
             'users_by_age_range' => [],
+            'clicks_by_field' => [],
         ];
 
         if ($query === 'age' || $query === 'all') {
@@ -22,6 +25,32 @@ class AnalyticsService
                     '34-45' => $this->getPercentageOfUsersByAgeRange(34, 45, $dateFrom, $dateTo),
                     '45+' => $this->getPercentageOfUsersByAgeRange(45, 100, $dateFrom, $dateTo),
             ];
+        }
+
+        $clicks = Click::all();
+
+        if (($query === 'clicks' && $clickTypes === 'restaurant') || $query === 'all') {
+            foreach ($clicks as $click) {
+                $data['clicks_by_field'][$click->field_name] = Click::where('field_name', $click->field_name)
+                    ->where('field_type', 'restaurant')
+                    ->count();
+            }
+        }
+
+        if (($query === 'clicks' && $clickTypes === 'hotel') || $query === 'all') {
+            foreach ($clicks as $click) {
+                $data['clicks_by_field'][$click->field_name] = Click::where('field_name', $click->field_name)
+                    ->where('field_type', 'hotel')
+                    ->count();
+            }
+        }
+
+        if (($query === 'clicks' && $clickTypes === 'games') || $query === 'all') {
+            foreach ($clicks as $click) {
+                $data['clicks_by_field'][$click->field_name] = Click::where('field_name', $click->field_name)
+                    ->where('field_type', 'games')
+                    ->count();
+            }
         }
 
 

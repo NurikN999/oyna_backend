@@ -69,8 +69,9 @@ class AnalyticsController extends Controller
         $query = $request->query('category', 'all');
         $dateFrom = $request->query('date_from_gte', null);
         $dateTo = $request->query('date_to_lte', null);
+        $clicksType = $request->query('click_type', null);
 
-        $analyticsData = $this->analyticsService->getAnalytics($query, $dateFrom, $dateTo);
+        $analyticsData = $this->analyticsService->getAnalytics($query, $dateFrom, $dateTo, $clicksType);
 
         return response()->json([
             'data' => $analyticsData,
