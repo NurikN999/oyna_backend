@@ -65,8 +65,8 @@ class StoreDifferenceRequest extends FormRequest
             'coordinates' => 'required|array',
             'coordinates.*.x' => 'required|numeric',
             'coordinates.*.y' => 'required|numeric',
-            'first_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'second_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'first_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'second_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'width' => 'required|numeric',
             'height' => 'required|numeric',
         ];

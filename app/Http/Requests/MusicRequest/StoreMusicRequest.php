@@ -55,7 +55,7 @@ class StoreMusicRequest extends FormRequest
         return [
             'title' => 'required|string',
             'genre' => ['required', 'string', new Enum(MusicGenreType::class)],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
             'file' => 'required|file|mimes:mp3,mp4,wav',
         ];
     }

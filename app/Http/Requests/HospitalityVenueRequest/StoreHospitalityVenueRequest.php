@@ -60,7 +60,7 @@ class StoreHospitalityVenueRequest extends FormRequest
             'address' => 'required|string',
             'description' => 'required|string',
             'city_id' => 'required|integer|exists:cities,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 }
