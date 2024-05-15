@@ -157,9 +157,10 @@ class UserController extends Controller
         $user = $this->userService->update($user, $data);
 
         if (isset($data['image']) && $data['image']) {
-            $user->image()->update([
-                'path' => $this->imageService->upload($data['image'], User::class, $user->id)
-            ]);
+            if ($user->image) {
+                $this->imageService->delete($user->image);
+            }
+            $this->imageService->upload($data['image'], User::class, $user->id);
         }
 
         return response()->json([
