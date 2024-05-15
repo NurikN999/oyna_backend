@@ -9,6 +9,7 @@ use App\Http\Requests\AdvertisingRequest\UpdateAdvertisingRequest;
 use App\Http\Resources\Api\AdvertisingResource;
 use App\Models\Advertising;
 use App\Services\Api\VideoService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AdvertisingController extends Controller
@@ -38,10 +39,17 @@ class AdvertisingController extends Controller
      * )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->query('type');
+        $advertisings = Advertising::query();
+
+        if ($query) {
+            $advertisings->where('placement_area', $query);
+        }
+
         return response()->json([
-            'data' => AdvertisingResource::collection(Advertising::all())
+            'data' => AdvertisingResource::collection($advertisings->get())
         ]);
     }
 
@@ -116,7 +124,7 @@ class AdvertisingController extends Controller
      *   )
      * )
      */
-    public function show(Advertising $advertising)
+    public function show(Advertising $advertising, Request $request)
     {
         return response()->json([
             'data' => new AdvertisingResource($advertising)
