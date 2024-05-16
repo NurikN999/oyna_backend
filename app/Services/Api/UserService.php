@@ -24,7 +24,7 @@ class UserService
             $query->where('is_taxi_driver', $queryFilter['is_taxi_driver']);
         }
 
-        return $query->paginate(10);
+        return $query->get();
     }
 
     public function create(array $data): User
