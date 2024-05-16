@@ -163,7 +163,7 @@ class DifferenceController extends Controller
         ]);
 
         $difference->coordinates()->delete();
-        $this->coordinateService->saveCoordinates($difference, $data);
+        $this->coordinateService->saveCoordinates($difference, $data['coordinates']);
 
         return response()->json(
             [
