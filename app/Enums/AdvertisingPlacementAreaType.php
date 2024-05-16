@@ -29,7 +29,7 @@ enum AdvertisingPlacementAreaType: string
     public static function titles(): array
     {
         return [
-            self::HOME_PAGE->value => 'Главная страница',
+            self::HOME_PAGE->value => 'Приветственная страница',
             self::SIDE_PANEL->value => 'Боковая панель',
             self::AFTER_OYNA_BUTTON->value => 'После кнопки "Ойна"',
         ];
