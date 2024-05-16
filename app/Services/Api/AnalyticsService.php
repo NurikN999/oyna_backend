@@ -15,7 +15,11 @@ class AnalyticsService
     {
         $data = [
             'users_by_age_range' => [],
-            'clicks_by_field' => [],
+            'clicks_by_field' => [
+                'restaurant' => [],
+                'hotel' => [],
+                'games' => [],
+            ],
         ];
 
         if ($query === 'age' || $query === 'all') {
@@ -31,7 +35,7 @@ class AnalyticsService
 
         if (($query === 'clicks' && $clickTypes === 'restaurant') || $query === 'all') {
             foreach ($clicks as $click) {
-                $data['clicks_by_field'][$click->field_name] = Click::where('field_name', $click->field_name)
+                $data['clicks_by_field'][$click->field_type][$click->field_name] = Click::where('field_name', $click->field_name)
                     ->where('field_type', 'restaurant')
                     ->count();
             }
@@ -39,7 +43,7 @@ class AnalyticsService
 
         if (($query === 'clicks' && $clickTypes === 'hotel') || $query === 'all') {
             foreach ($clicks as $click) {
-                $data['clicks_by_field'][$click->field_name] = Click::where('field_name', $click->field_name)
+                $data['clicks_by_field'][$click->field_type][$click->field_name] = Click::where('field_name', $click->field_name)
                     ->where('field_type', 'hotel')
                     ->count();
             }
@@ -47,7 +51,7 @@ class AnalyticsService
 
         if (($query === 'clicks' && $clickTypes === 'games') || $query === 'all') {
             foreach ($clicks as $click) {
-                $data['clicks_by_field'][$click->field_name] = Click::where('field_name', $click->field_name)
+                $data['clicks_by_field'][$click->field_type][$click->field_name] = Click::where('field_name', $click->field_name)
                     ->where('field_type', 'games')
                     ->count();
             }
