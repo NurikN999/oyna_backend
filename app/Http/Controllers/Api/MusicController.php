@@ -188,8 +188,7 @@ class MusicController extends Controller
     {
         $data = $request->validated();
         if ($request->hasFile('file')) {
-            $this->musicService->delete($music->path);
-            $path = $this->musicService->upload($request->file('file'), $data['title']);
+            $path = $this->musicService->upload($request->file('file'), $data['title'] ?? $music->title);
             $music->update(array_merge($data, ['path' => $path]));
         } else {
             $music->update($data);
