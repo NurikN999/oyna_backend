@@ -57,6 +57,17 @@ class AnalyticsService
             }
         }
 
+        if ($query === 'clicks' || $query === 'all') {
+            foreach ($clicks as $click) {
+                if (!isset($data['clicks_by_field'][$click->field_type])) {
+                    $data['clicks_by_field'][$click->field_type] = [];
+                }
+
+                $data['clicks_by_field'][$click->field_type][$click->field_name] = Click::where('field_name', $click->field_name)
+                    ->where('field_type', $click->field_type)
+                    ->count();
+            }
+        }
 
         return $data;
     }
